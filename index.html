@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070d">
+<title>Student+ · Your student life, upgraded.</title>
+<style>
+:root{
+  --bg:#07070d; --paper:#07070d; --s1:#101019; --s2:#171724; --s3:#20203a;
+  --ink:#f4f3ff; --muted:#a3a1bf; --line:rgba(255,255,255,.11); --line2:rgba(255,255,255,.2);
+  --blue:#4f6bff; --violet:#9b5cff; --violet2:#b98bff; --grad:linear-gradient(135deg,#4f6bff 0%,#9b5cff 100%);
+  --lime:#d7ff3a; --pink:#ff5ccf;
+  --ok:#5ff0a6; --okbg:rgba(95,240,166,.1); --warn:#ffc46b; --warnbg:rgba(255,196,107,.1); --red:#ff6b6b;
+  --r:18px;
+  --font: "Inter", "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.5;font-size:16px;overflow-x:hidden;overflow-wrap:break-word;word-wrap:break-word;padding-bottom:88px;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 380px at 0% -5%,rgba(79,107,255,.28),transparent 70%),radial-gradient(480px 380px at 100% 10%,rgba(155,92,255,.24),transparent 70%),radial-gradient(600px 400px at 50% 110%,rgba(155,92,255,.12),transparent 70%)}
+body.nobar{padding-bottom:0}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,h4,p{margin:0}
+svg{display:block}
+::selection{background:var(--violet);color:#fff}
+.wrap{width:100%;max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:30;background:rgba(7,7,13,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:10px;padding-top:12px;padding-bottom:12px}
+.logo{border:0;background:none;padding:2px 0;font-weight:800;font-size:1.3rem;letter-spacing:-.04em;cursor:pointer;display:flex;align-items:center}
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;margin-left:1px}
+.end{margin-left:auto;border:1px solid var(--line2);background:transparent;border-radius:999px;padding:7px 14px;font-weight:600;font-size:.85rem;cursor:pointer;min-height:38px;color:var(--ink)}
+.notice{background:rgba(255,255,255,.04);border-bottom:1px solid var(--line);color:var(--muted);text-align:center;font-size:.78rem;padding:5px 12px;font-weight:500;letter-spacing:.01em}
+
+/* Bottom tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(10,10,18,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+.tabbar .nav{flex:1 1 0;max-width:130px;min-width:0;border:0;background:none;border-radius:14px;padding:6px 4px;min-height:54px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.1;position:relative;color:var(--muted)}
+.tabbar .nav svg{width:22px;height:22px}
+.tabbar .nav .mono{width:24px;height:24px;border-radius:7px;font-size:.62rem}
+.tabbar .nav span{font-size:.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tabbar .nav.on{color:var(--ink);background:rgba(255,255,255,.07)}
+.tabbar .nav.on:after{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 4px 4px;background:var(--grad)}
+.tabbar .pill{position:absolute;top:4px;right:calc(50% - 22px);min-width:18px;height:18px;border-radius:999px;background:var(--violet);color:#fff;font-size:.68rem;font-weight:800;display:grid;place-items:center}
+
+/* Generic */
+main{padding:22px 0 40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:14px;padding:12px 18px;min-height:50px;font-weight:700;font-size:1rem;cursor:pointer;text-align:center;line-height:1.2;max-width:100%;transition:transform .08s,box-shadow .15s,background .15s;background:rgba(255,255,255,.08);color:var(--ink)}
+.btn:active{transform:scale(.98)}
+.btn-primary,.btn-violet{background:var(--grad);color:#fff;box-shadow:0 8px 26px rgba(110,90,255,.35)}
+.btn-lime{background:var(--lime);color:#0b0b12}
+.btn-ink,.btn-white{background:#fff;color:#0b0b12}
+.btn-soft{background:rgba(255,255,255,.08);color:var(--ink)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--line2)}
+.btn-wide{width:100%}
+.btn-sm{min-height:42px;padding:8px 14px;font-size:.92rem}
+.btn[disabled]{opacity:.38;cursor:not-allowed;box-shadow:none;transform:none}
+.linkbtn{border:0;background:none;padding:10px 4px;min-height:44px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line2);text-decoration-thickness:1px;text-underline-offset:5px;font-weight:600;font-size:.98rem;cursor:pointer;text-align:center}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.small{font-size:.86rem;color:var(--muted)}
+.muted{color:var(--muted)}
+.center{text-align:center}
+.mt{margin-top:14px}.mb{margin-bottom:14px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+.badge.ok{background:rgba(95,240,166,.12);color:var(--ok)}
+.badge.off{background:rgba(255,255,255,.06);color:var(--muted)}
+.badge.pause{background:var(--warnbg);color:var(--warn)}
+.section-title{font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;letter-spacing:-.045em;margin:4px 0 14px;line-height:1.05}
+.h3{font-size:1.15rem;font-weight:800;margin:26px 0 10px;letter-spacing:-.02em}
+.eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--violet2);margin-bottom:8px}
+.sticker{display:inline-block;background:rgba(215,255,58,.1);color:var(--lime);border:1px solid rgba(215,255,58,.35);border-radius:999px;padding:4px 11px;font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.sticker.pink{background:rgba(255,92,207,.1);color:var(--pink);border-color:rgba(255,92,207,.35)}
+.sticker.white{background:rgba(255,255,255,.1);color:#fff;border-color:var(--line2)}
+.hl{color:var(--lime)}
+.hl-v{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{flex:0 0 auto;display:grid;place-items:center;border-radius:14px;font-weight:900;letter-spacing:-.04em;color:#fff}
+.disc{font-size:.78rem;color:var(--muted);border:1px dashed var(--line2);border-radius:12px;padding:8px 12px;margin:12px 0}
+
+/* Marquee */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:22px 0;white-space:nowrap;font-weight:800;letter-spacing:.14em;font-size:.78rem;color:var(--muted)}
+.marquee div{display:inline-block;padding:12px 0;animation:mq 26s linear infinite}
+.marquee b{color:var(--lime);font-weight:800}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee div,.typing span,.hold,.spin,.peek .arrow{animation:none}}
+
+/* Intro slides */
+.intro{max-width:560px;margin:0 auto}
+.slide{border:1px solid var(--line);border-radius:26px;padding:26px 22px 22px;position:relative;overflow:hidden;min-height:min(72vh,620px);display:flex;flex-direction:column;background:#0d0d17}
+.slide:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-180px;top:-200px;filter:blur(10px);opacity:.9}
+.slide.s0:before{background:radial-gradient(closest-side,rgba(79,107,255,.65),transparent)}
+.slide.s1:before{background:radial-gradient(closest-side,rgba(79,107,255,.6),transparent)}
+.slide.s2:before{background:radial-gradient(closest-side,rgba(155,92,255,.65),transparent)}
+.slide.s3:before{background:radial-gradient(closest-side,rgba(215,255,58,.35),transparent)}
+.slide.s4:before{background:radial-gradient(closest-side,rgba(255,92,207,.45),transparent)}
+.slide h1{font-size:clamp(2.4rem,11vw,3.6rem);line-height:.96;font-weight:900;letter-spacing:-.055em;position:relative;margin-top:14px}
+.slide p{font-size:1.08rem;font-weight:500;margin-top:14px;position:relative;color:#d3d1ea;max-width:420px}
+.slide .sart{flex:1;display:flex;align-items:center;justify-content:center;margin:20px 0;position:relative;min-height:170px}
+.slide .kicker{position:relative}
+.sdots{display:flex;gap:6px;justify-content:center;margin:16px 0 12px}
+.sdots i{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.2)}
+.sdots i.on{width:26px;background:var(--grad)}
+.stack3{position:relative;width:min(100%,320px);height:210px}
+.stack3 .pc{position:absolute;width:66%;padding:14px 16px;border-radius:16px;font-weight:800;font-size:1.15rem;background:rgba(255,255,255,.07);border:1px solid var(--line2);backdrop-filter:blur(8px);display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px rgba(0,0,0,.45)}
+.stack3 .pc small{display:block;font-size:.76rem;font-weight:500;color:var(--muted)}
+.stack3 .pc.a{left:0;top:6px}.stack3 .pc.b{right:0;top:76px}.stack3 .pc.c{left:9%;top:146px}
+.bigprice{font-size:clamp(3rem,16vw,5rem);font-weight:900;letter-spacing:-.06em;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fan{display:flex;justify-content:center;width:100%}
+.fan>div{width:34%;margin:0 -3%;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.55);border:1px solid var(--line2)}
+.fan>div:nth-child(1){transform:rotate(-7deg) translateY(10px)}
+.fan>div:nth-child(2){transform:translateY(-6px);z-index:2}
+.fan>div:nth-child(3){transform:rotate(7deg) translateY(10px)}
+
+/* Home */
+.hero{border:1px solid var(--line);border-radius:26px;padding:30px 22px;position:relative;overflow:hidden;margin-bottom:8px;background:#0d0d17}
+.hero:before{content:"";position:absolute;width:460px;height:460px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(closest-side,rgba(155,92,255,.55),transparent)}
+.hero:after{content:"";position:absolute;width:380px;height:380px;left:-180px;bottom:-240px;border-radius:50%;background:radial-gradient(closest-side,rgba(79,107,255,.5),transparent)}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.3rem,9.5vw,4rem);line-height:.96;letter-spacing:-.055em;font-weight:900;max-width:640px;margin-top:14px}
+.hero p{margin-top:14px;font-size:1.06rem;color:#d3d1ea;max-width:520px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.plan{display:flex;flex-direction:column;gap:12px}
+.plan-head{display:flex;align-items:center;gap:12px}
+.icon{flex:0 0 auto;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:.95rem;font-weight:900;letter-spacing:-.04em;color:#fff}
+.i-watch{background:linear-gradient(135deg,#4f6bff,#2b3fd6)}
+.i-life{background:linear-gradient(135deg,#9b5cff,#6a2ee8)}
+.i-study{background:linear-gradient(135deg,#5b7bff,#b05cff)}
+.i-news{background:linear-gradient(135deg,#d7ff3a,#8be04a);color:#0b0b12}
+.plan h3{font-size:1.4rem;font-weight:800;letter-spacing:-.035em}
+.tagline{font-weight:600;color:#d3d1ea}
+.perks{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.perks li{padding-left:26px;position:relative;color:#d3d1ea}
+.perks li:before{content:"";position:absolute;left:2px;top:.5em;width:12px;height:7px;border-left:2px solid var(--lime);border-bottom:2px solid var(--lime);transform:rotate(-45deg)}
+.pricebig{font-size:2.5rem;font-weight:900;letter-spacing:-.05em;line-height:1}
+.pricebig small{font-size:.95rem;font-weight:600;color:var(--muted);letter-spacing:0}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.minis>div{border-radius:10px;overflow:hidden;min-width:0}
+.minis .poster,.minis .cover{box-shadow:none;border-radius:0}
+.minis svg,.fan svg{width:100%;height:100%}
+.active-note{background:var(--okbg);color:var(--ok);font-weight:700;border-radius:12px;padding:10px 12px;border:1px solid rgba(95,240,166,.3)}
+.limit-note{background:rgba(255,255,255,.04);border:1px dashed var(--line2);border-radius:12px;padding:10px 12px;font-size:.9rem;color:var(--muted)}
+.spacer{flex:1}
+.bundle{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;position:relative;border-color:rgba(155,92,255,.5);background:linear-gradient(135deg,rgba(79,107,255,.18),rgba(155,92,255,.22))}
+.bundle .sticker{position:absolute;top:-12px;right:16px;background:#0d0d17}
+@media (min-width:720px){.bundle{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center}}
+.peek{text-align:center;margin:44px 0 18px}
+.peek .arrow{display:block;margin:10px auto 0;width:2px;height:34px;background:linear-gradient(var(--lime),transparent);animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.free{border:1px solid rgba(215,255,58,.3);border-radius:26px;padding:24px 18px;scroll-margin-top:90px;background:linear-gradient(180deg,rgba(215,255,58,.07),rgba(255,255,255,.02))}
+.free h2{font-size:clamp(1.9rem,8vw,3rem);font-weight:900;letter-spacing:-.05em;line-height:1}
+.free-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;margin-top:18px}
+.free-item{border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;background:rgba(7,7,13,.55)}
+.free-item .plan-head h3{font-size:1.2rem;font-weight:800}
+.freeline{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-weight:600}
+.freeline b{font-size:1.35rem;font-weight:900;color:var(--lime)}
+
+/* Subscriptions */
+.sub{display:flex;flex-direction:column;gap:12px}
+.sub-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.grow{flex:1;min-width:0}
+.sample{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.sample ul{margin:6px 0 0;padding-left:20px}
+.empty{text-align:center;padding:32px 20px}
+
+/* Onboarding */
+.ob{max-width:620px;margin:0 auto}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+.dots i{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.18)}
+.dots i.on{width:26px;background:var(--grad)}
+.ob h2{font-size:1.8rem;font-weight:900;letter-spacing:-.045em;margin-bottom:8px;line-height:1.05}
+.ob .art{margin:18px 0}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.pick button{border:1px solid var(--line2);background:transparent;border-radius:999px;padding:9px 15px;min-height:44px;font-weight:600;cursor:pointer;color:var(--ink)}
+.pick button.sel{background:var(--grad);border-color:transparent;color:#fff}
+.celebrate{width:72px;height:72px;border-radius:22px;background:var(--grad);font-size:2rem;display:grid;place-items:center;margin:4px auto 16px;font-weight:900;color:#fff;box-shadow:0 10px 30px rgba(110,90,255,.45)}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.g3>*,.g2>*{min-width:0}
+.devices{display:flex;align-items:flex-end;justify-content:center;gap:14px;padding:10px 0}
+.laptop{width:min(62%,280px)}
+.laptop .scr{border:7px solid #2a2a40;border-radius:10px 10px 0 0;overflow:hidden;aspect-ratio:16/10;background:#000}
+.laptop .base{height:10px;background:#2a2a40;border-radius:0 0 10px 10px;margin:0 -14px}
+.phone{width:min(24%,96px);border:5px solid #2a2a40;border-radius:16px;overflow:hidden;aspect-ratio:9/17;background:#000}
+.scr svg,.phone svg{width:100%;height:100%}
+.match{position:relative}
+.match span{position:absolute;left:6px;top:6px;background:rgba(7,7,13,.8);color:var(--lime);font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:999px;border:1px solid rgba(215,255,58,.4)}
+.meter{background:rgba(255,255,255,.08);border-radius:999px;height:8px;overflow:hidden;margin:6px 0 12px}
+.meter i{display:block;height:100%;background:var(--grad)}
+.ticket{border:1px solid var(--line2);border-radius:20px;background:linear-gradient(135deg,rgba(79,107,255,.2),rgba(155,92,255,.2));padding:16px;position:relative;text-align:left}
+.ticket:before,.ticket:after{content:"";position:absolute;top:50%;width:20px;height:20px;border-radius:50%;background:#101019;border:1px solid var(--line2)}
+.ticket:before{left:-11px}.ticket:after{right:-11px}
+.tk-row{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:14px;border-top:1px dashed var(--line2);padding-top:12px}
+.tk-row>div{flex:1 1 auto}
+.tk-row b{display:block;font-size:1.05rem;font-weight:800;white-space:nowrap;overflow-wrap:normal}
+.statbox{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;background:rgba(255,255,255,.04)}
+.statbox b{font-size:2rem;font-weight:900;letter-spacing:-.05em;line-height:1}
+.statbox span{font-weight:600;font-size:.88rem;color:var(--muted)}
+.statbox.s0 b{color:#8aa0ff}.statbox.s1 b{color:var(--lime)}.statbox.s2 b{color:var(--pink)}.statbox.s3 b{color:var(--violet2)}
+
+/* Hub */
+.hubhead{border:1px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:18px;position:relative;overflow:hidden;background:#0d0d17}
+.hubhead:before{content:"";position:absolute;width:300px;height:300px;right:-120px;top:-160px;border-radius:50%;background:radial-gradient(closest-side,rgba(155,92,255,.5),transparent)}
+.hubhead.hh-watch:before{background:radial-gradient(closest-side,rgba(79,107,255,.6),transparent)}
+.hubhead>*{position:relative}
+.hubhead h2{font-size:1.6rem;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
+.hubhead .grow{min-width:150px}
+@media (max-width:430px){.hubhead .btn{width:100%}}
+.feature{display:grid;grid-template-columns:minmax(0,130px) minmax(0,1fr);gap:16px;align-items:center;background:#0d0d17;border:1px solid var(--line);border-radius:22px;padding:16px;overflow:hidden}
+.feature h3{font-size:1.45rem;font-weight:900;line-height:1.05;letter-spacing:-.04em}
+.feature p{color:#d3d1ea;margin:6px 0 12px;font-size:.95rem}
+@media (min-width:640px){.feature{grid-template-columns:minmax(0,180px) minmax(0,1fr)}}
+.rowsec{margin-top:24px}
+.rowsec h3{font-size:1.1rem;font-weight:800;margin-bottom:10px;letter-spacing:-.02em}
+.scroller{display:flex;gap:12px;overflow-x:auto;padding:2px 6px 12px 2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.tile{flex:0 0 128px;border:0;background:none;padding:0;text-align:left;cursor:pointer;scroll-snap-align:start;color:var(--ink)}
+.poster{border-radius:10px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.45);aspect-ratio:2/3;background:#222}
+.poster svg{width:100%;height:100%}
+.tname{display:block;font-weight:700;font-size:.88rem;margin-top:8px;line-height:1.25}
+.tmeta{display:block;font-size:.78rem;color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 4px 8px 2px;margin-bottom:12px}
+.tabs button{flex:0 0 auto;border:1px solid var(--line2);background:transparent;border-radius:999px;padding:8px 16px;min-height:42px;font-weight:600;cursor:pointer;color:var(--ink)}
+.tabs button.on{background:#fff;color:#0b0b12;border-color:#fff}
+.perkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:12px}
+.perk{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:16px;overflow:hidden;text-align:left;padding:0;cursor:pointer;display:flex;flex-direction:column;color:var(--ink)}
+.perk .pa{aspect-ratio:16/10}
+.perk .pa svg{width:100%;height:100%}
+.perk .pb{padding:10px 12px 12px}
+.perk .deal{font-weight:700;line-height:1.25;font-size:.95rem}
+.brand{display:block;font-weight:900;letter-spacing:-.02em;font-size:1rem;margin-bottom:2px}
+.tagc{display:inline-block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--violet2);margin-bottom:2px}
+.used{display:inline-block;margin-top:6px;font-size:.76rem;font-weight:700;color:var(--ok)}
+.event{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.event .date{flex:0 0 auto;width:62px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);text-align:center;padding:8px 4px;font-weight:800;font-size:.8rem;line-height:1.25}
+.event .date b{display:block;color:var(--lime)}
+.savings{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.savings .n{font-size:2.2rem;font-weight:900;letter-spacing:-.05em}
+.sumgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,145px),1fr));gap:14px}
+.sumcard{border:0;background:none;padding:0;text-align:left;cursor:pointer;color:var(--ink)}
+.cover{border-radius:8px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.cover svg{width:100%;height:100%}
+.folder{margin-bottom:14px}
+.folder h4{font-size:1.05rem;font-weight:800;margin-bottom:6px}
+.mi{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:14px 4px;min-height:50px;cursor:pointer;font-weight:600;color:var(--ink)}
+.mi:last-child{border-bottom:0}
+.mi span{color:var(--muted)}
+.fc{margin:6px 0 12px}
+.fc-in{border:0;width:100%;min-height:210px;border-radius:20px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;background:var(--grad);color:#fff;box-shadow:0 14px 36px rgba(110,90,255,.35)}
+.fc-in.back{background:#fff;color:#0b0b12}
+.fc-in.back .small{color:#555}
+.fc-in b{font-size:1.75rem;line-height:1.1;letter-spacing:-.04em}
+.qopt{display:block;width:100%;text-align:left;border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:14px;padding:12px 14px;min-height:50px;cursor:pointer;font-weight:600;margin-bottom:10px;color:var(--ink)}
+.qopt.right{background:rgba(95,240,166,.12);border-color:var(--ok)}
+.qopt.wrong{background:rgba(255,107,107,.12);border-color:var(--red)}
+.reader li{margin-bottom:10px;color:#d3d1ea}
+.player{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;border:1px solid var(--line)}
+.player svg{width:100%;height:100%;opacity:.5}
+.player .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:12px}
+.player .pl{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.95);color:#0b0b12;display:grid;place-items:center;font-size:1.4rem;margin-bottom:8px}
+.player .pbar{position:absolute;left:12px;right:12px;bottom:12px;height:4px;background:rgba(255,255,255,.25);border-radius:9px;overflow:hidden}
+.player .pbar i{display:block;height:100%;width:0;background:var(--grad);animation:play 30s linear forwards}
+@keyframes play{to{width:100%}}
+.detail{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+@media (min-width:640px){.detail{grid-template-columns:minmax(0,220px) minmax(0,1fr)}}
+.detail .poster{max-width:220px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.meta span{background:rgba(255,255,255,.07);border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:600}
+.ep{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.ep .pn{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-weight:800}
+.coupon{border:1px dashed var(--line2);border-radius:22px;padding:18px;background:rgba(255,255,255,.03);text-align:center}
+.qr{display:grid;grid-template-columns:repeat(13,1fr);width:150px;height:150px;margin:14px auto;background:#fff;padding:8px;border-radius:12px}
+.qr i{display:block}
+.qr i.k{background:#0b0b12}
+.codeline{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.3rem;font-weight:700;letter-spacing:.14em}
+.back{margin-bottom:10px}
+.more-plans{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;border-color:rgba(155,92,255,.4)}
+.more-plans b{font-size:1.1rem;font-weight:800}
+.news{display:flex;flex-wrap:wrap;gap:12px;align-items:center;border-color:rgba(215,255,58,.3)}
+
+/* Cancellation flow */
+.flow{max-width:580px;margin:0 auto}
+.flow .card{padding:22px}
+.flow h2{font-size:1.55rem;font-weight:900;letter-spacing:-.04em;margin-bottom:8px;line-height:1.1}
+.step-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.prog{margin-bottom:14px}
+.prog-l{font-size:.76rem;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
+.bar{height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad)}
+.opts{display:flex;flex-direction:column;gap:9px;margin:14px 0}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:14px;padding:12px 14px;min-height:50px;cursor:pointer;font-weight:600;color:var(--ink)}
+.opt .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--muted)}
+.opt.sel{border-color:var(--violet);background:rgba(155,92,255,.12)}
+.opt.sel .dot{border:6px solid var(--violet)}
+.opt .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--muted);display:grid;place-items:center;font-size:.75rem;font-weight:900;color:#fff}
+.opt.sel .box{background:var(--violet);border-color:var(--violet)}
+.tgl{flex:0 0 auto;width:44px;height:26px;border-radius:99px;background:rgba(255,255,255,.15);position:relative;margin-left:auto}
+.tgl:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
+.opt.on .tgl{background:var(--violet)}
+.opt.on .tgl:after{left:21px}
+.offer{background:linear-gradient(135deg,rgba(79,107,255,.35),rgba(155,92,255,.35));border:1px solid rgba(155,92,255,.5);border-radius:20px;padding:22px;margin:14px 0;text-align:center}
+.offer .big{font-size:2.8rem;font-weight:900;line-height:1;letter-spacing:-.05em}
+.offer .btn{margin-top:14px;width:100%;background:#fff;color:#0b0b12}
+.lose{list-style:none;padding:0;margin:14px 0;display:flex;flex-direction:column;gap:8px}
+.lose li{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.3);border-radius:12px;padding:10px 12px 10px 38px;position:relative;font-weight:600}
+.lose li:before{content:"✕";position:absolute;left:13px;top:10px;color:var(--red);font-weight:900}
+.pausebox{border:1px solid rgba(215,255,58,.4);background:rgba(215,255,58,.07);border-radius:20px;padding:18px;margin:14px 0}
+.pausebox h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.result{text-align:center}
+.mark{width:68px;height:68px;border-radius:22px;display:grid;place-items:center;margin:0 auto 14px;font-size:1.9rem;font-weight:900}
+.mark.ok{background:rgba(95,240,166,.14);color:var(--ok);border:1px solid rgba(95,240,166,.4)}
+.mark.keep{background:var(--warnbg);color:var(--warn);border:1px solid rgba(255,196,107,.4)}
+.status-line{margin:12px 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-weight:800}
+.warnbox{background:var(--warnbg);color:var(--warn);border:1px solid rgba(255,196,107,.35);border-radius:12px;padding:10px 12px;font-weight:600;margin:10px 0}
+.errbox{background:rgba(255,107,107,.1);color:var(--red);border:1px solid rgba(255,107,107,.35);border-radius:12px;padding:10px 12px;font-weight:700;margin:10px 0}
+.divider{height:1px;background:var(--line);margin:16px 0}
+.scale{display:flex;gap:6px;margin:8px 0 14px}
+.scale button{flex:1;min-width:0;min-height:46px;border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:12px;font-weight:800;cursor:pointer;color:var(--ink)}
+.scale button.sel{background:var(--violet);border-color:var(--violet);color:#fff}
+.scale-l{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted);margin-top:-10px;margin-bottom:12px}
+.typein{width:100%;font-size:1.2rem;padding:12px 14px;border:1px solid var(--line2);border-radius:14px;margin:10px 0;text-transform:uppercase;letter-spacing:.1em;font-weight:700;background:rgba(255,255,255,.05);color:var(--ink)}
+.typein:focus{outline:2px solid var(--violet);outline-offset:2px}
+.word{font-family:ui-monospace,Menlo,Consolas,monospace;background:rgba(215,255,58,.12);color:var(--lime);padding:1px 8px;border-radius:6px;font-weight:700}
+.inbox{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.05);margin:12px 0}
+.digits{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.digits span{width:50px;height:58px;border-radius:12px;border:1px solid var(--line2);display:grid;place-items:center;font-size:1.5rem;font-weight:800;background:rgba(255,255,255,.04)}
+.pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:300px;margin:0 auto 12px}
+.pad button{min-height:54px;border-radius:50px;border:0;background:rgba(255,255,255,.08);font-size:1.3rem;font-weight:600;cursor:pointer;color:var(--ink)}
+.pad button:active{background:rgba(255,255,255,.2)}
+.phonebox{background:#0d0d17;color:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0}
+.phonebox .menu{background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px;margin:10px 0;font-size:.95rem}
+.phonebox .menu div{padding:3px 0}
+.hold{font-size:1.8rem;text-align:center;animation:blink 1.2s infinite;letter-spacing:.3em}
+.chat{display:flex;flex-direction:column;gap:10px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0;min-height:160px}
+.msg{max-width:88%;padding:10px 13px;border-radius:18px;font-size:.96rem}
+.msg.bot{background:#1d1d2e;align-self:flex-start;border-bottom-left-radius:5px}
+.msg.user{background:var(--grad);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.who{font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:2px}
+.typing{align-self:flex-start;background:#1d1d2e;border-radius:16px;padding:10px 14px;color:var(--muted);font-size:.9rem}
+.typing span{display:inline-block;animation:blink 1s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.spin{width:54px;height:54px;border-radius:50%;border:4px solid rgba(255,255,255,.1);border-top-color:var(--violet);margin:22px auto;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.search{width:100%;border:1px solid var(--line2);border-radius:12px;padding:12px 14px;color:var(--muted);background:rgba(255,255,255,.04);margin:10px 0}
+
+/* Sheet */
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;padding:12px}
+.sheet{width:100%;max-width:480px;background:#12121d;border:1px solid var(--line2);border-radius:26px;padding:22px;margin-bottom:max(12px,env(safe-area-inset-bottom));max-height:calc(100vh - 24px);overflow:auto}
+.sheet h2{font-size:1.8rem;font-weight:900;letter-spacing:-.045em;line-height:1.05}
+@media (min-width:720px){.overlay{align-items:center}}
+
+/* Results */
+.results{margin-top:20px}
+.results h3{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px;margin-top:12px}
+.rbox{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px}
+.rbox .n{font-size:1.8rem;font-weight:900;letter-spacing:-.04em}
+.rbox .l{font-size:.84rem;color:var(--muted)}
+.rlist{margin:12px 0 0;padding-left:20px}
+
+.toast{pointer-events:none;position:fixed;left:50%;bottom:100px;transform:translateX(-50%);z-index:70;background:#fff;color:#0b0b12;font-weight:700;padding:12px 18px;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.5);max-width:calc(100% - 32px);text-align:center}
+.toast.info{background:#e8e6ff}
+body.nobar .toast{bottom:20px}
+
+/* Presenter */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.pcard h3{font-size:1.1rem;font-weight:800;margin-bottom:6px}
+.pcard p{margin-bottom:12px}
+.ptag{display:inline-block;background:rgba(255,255,255,.1);color:#fff;font-size:.74rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase}
+.okmsg{background:var(--okbg);color:var(--ok);border:1px solid rgba(95,240,166,.3);font-weight:700;border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.simple{max-width:480px;margin:0 auto}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= Storage (sessionStorage or memory) ================= */
+  var KEY = 'studentplus_sim_v4';
+  var KEY_P = 'studentplus_presenter_example_v4';
+  var store = (function () {
+    var ok = false, mem = {};
+    try { var t = '__sp_test'; window.sessionStorage.setItem(t, '1'); window.sessionStorage.removeItem(t); ok = true; } catch (e) { ok = false; }
+    return {
+      get: function (k) {
+        var raw = null;
+        try { raw = ok ? window.sessionStorage.getItem(k) : null; } catch (e) { raw = null; }
+        if (raw == null) raw = Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null;
+        if (raw == null) return null;
+        try { return JSON.parse(raw); } catch (e) { return null; }
+      },
+      set: function (k, v) { var s = JSON.stringify(v); mem[k] = s; try { if (ok) window.sessionStorage.setItem(k, s); } catch (e) {} },
+      del: function (k) { delete mem[k]; try { if (ok) window.sessionStorage.removeItem(k); } catch (e) {} }
+    };
+  })();
+
+  /* ================= Content ================= */
+  var ORDER = ['watch', 'life', 'study'];
+  var PLANS = {
+    watch: { name: 'Watch+', icon: 'W+', cls: 'i-watch', tag: 'Your next favourite film starts here.',
+      perks: ['Films and series for every mood', 'Recommendations for different tastes', 'Entertainment with no ads'] },
+    life: { name: 'Life+', icon: 'L+', cls: 'i-life', tag: 'More plans. More student perks.',
+      perks: ['Discounts at cafés and food spots', 'Perks for the cinema and activities', 'Plans to enjoy with friends'] },
+    study: { name: 'Study+', icon: 'S+', cls: 'i-study', tag: 'Understand more. Study smarter.',
+      perks: ['Book and topic summaries in minutes', 'Organised notes for every subject', 'Flashcards and quizzes to review'] },
+    news: { name: 'Student+ Drop', icon: 'D', cls: 'i-news', tag: 'Weekly newsletter' }
+  };
+
+  var TITLES = [
+    { n: 'Stranger Things', g: 'Sci-fi', ty: 'Series', d: '2016', h: 350, m: 'moon', s: 'A small town, a missing boy and a secret lab. A group of friends discovers a world hidden right under theirs.' },
+    { n: 'Dune: Part Two', g: 'Sci-fi', ty: 'Film', d: '2h 46m', h: 30, m: 'sun', s: 'Paul Atreides joins the Fremen in the desert and faces a choice between love and the fate of the universe.' },
+    { n: 'Wednesday', g: 'Mystery', ty: 'Series', d: '2022', h: 260, m: 'eye', s: 'Wednesday Addams starts at a new school and tries to solve a series of murders, while staying very unimpressed.' },
+    { n: 'Barbie', g: 'Comedy', ty: 'Film', d: '1h 54m', h: 325, m: 'heart', s: 'Life in Barbie Land is perfect, until Barbie starts asking big questions and travels to the real world.' },
+    { n: 'Money Heist', g: 'Thriller', ty: 'Series', d: '2017', h: 0, m: 'mask', s: 'A mysterious Professor and eight robbers plan the biggest heist in Spanish history.' },
+    { n: 'Spider-Man: Across the Spider-Verse', g: 'Animation', ty: 'Film', d: '2h 20m', h: 300, m: 'grid', s: 'Miles Morales travels across the multiverse and meets a whole society of Spider-People.' },
+    { n: 'Oppenheimer', g: 'Drama', ty: 'Film', d: '3h', h: 25, m: 'planet', s: 'The story of the physicist who led the project that built the first atomic bomb.' },
+    { n: 'Élite', g: 'Drama', ty: 'Series', d: '2018', h: 210, m: 'city', s: 'Three students join the most exclusive school in Spain, and everything falls apart.' },
+    { n: 'The Bear', g: 'Comedy', ty: 'Series', d: '2022', h: 15, m: 'city', s: 'A top chef comes home to Chicago to run his family’s chaotic sandwich shop.' },
+    { n: 'Past Lives', g: 'Romance', ty: 'Film', d: '1h 46m', h: 200, m: 'road', s: 'Two childhood friends meet again in New York after twenty years apart.' },
+    { n: 'My Octopus Teacher', g: 'Documentary', ty: 'Film', d: '1h 25m', h: 185, m: 'waves', s: 'A filmmaker builds an unusual friendship with an octopus in a South African kelp forest.' },
+    { n: 'Inside Out 2', g: 'Animation', ty: 'Film', d: '1h 36m', h: 280, m: 'stars', s: 'Riley is a teenager now, and new emotions like Anxiety have moved into her head.' },
+    { n: 'Everything Everywhere All at Once', g: 'Action', ty: 'Film', d: '2h 19m', h: 45, m: 'eye', s: 'A tired laundromat owner discovers she can jump between universes.' },
+    { n: 'Normal People', g: 'Romance', ty: 'Series', d: '2020', h: 160, m: 'road', s: 'Marianne and Connell, from school in Ireland to university in Dublin, never quite together and never apart.' },
+    { n: 'Get Out', g: 'Horror', ty: 'Film', d: '1h 44m', h: 120, m: 'eye', s: 'A weekend visit to his girlfriend’s parents turns into something very wrong.' },
+    { n: 'The Social Network', g: 'Drama', ty: 'Film', d: '2h', h: 220, m: 'grid', s: 'How a university student created a social network and lost his friends along the way.' },
+    { n: 'Saltburn', g: 'Thriller', ty: 'Film', d: '2h 11m', h: 345, m: 'sun', s: 'An Oxford student is invited to spend the summer at a rich classmate’s family estate.' },
+    { n: 'Parasite', g: 'Thriller', ty: 'Film', d: '2h 12m', h: 95, m: 'city', s: 'A poor family slowly finds its way into the life of a rich one.' },
+    { n: 'Dark', g: 'Sci-fi', ty: 'Series', d: '2017', h: 230, m: 'moon', s: 'In a German town, the disappearance of two children reveals a secret that connects four families across time.' },
+    { n: 'Sex Education', g: 'Comedy', ty: 'Series', d: '2019', h: 330, m: 'mask', s: 'A shy teenager starts a secret advice clinic at school, with help from his classmate Maeve.' },
+    { n: 'Interstellar', g: 'Sci-fi', ty: 'Film', d: '2h 49m', h: 215, m: 'planet', s: 'A group of astronauts travels through a wormhole to find a new home for humanity.' },
+    { n: 'Knives Out', g: 'Mystery', ty: 'Film', d: '2h 10m', h: 20, m: 'book', s: 'A famous crime writer dies after his birthday party, and everyone in the family is a suspect.' },
+    { n: 'The Social Dilemma', g: 'Documentary', ty: 'Film', d: '1h 34m', h: 250, m: 'grid', s: 'Former tech workers explain how apps are designed to keep us scrolling.' },
+    { n: 'Free Solo', g: 'Documentary', ty: 'Film', d: '1h 40m', h: 40, m: 'road', s: 'Alex Honnold tries to climb El Capitan without ropes.' }
+  ];
+
+  var PERKS = [
+    { c: 'Coffee', t: '2-for-1 Frappuccino on Mondays', w: 'Starbucks', d: 'Bring a friend: two drinks for the price of one, every Monday.', s: 5.2 },
+    { c: 'Coffee', t: 'Free croissant with any coffee', w: '365 Obrador', d: 'Before 11:00, with any hot drink.', s: 1.6 },
+    { c: 'Coffee', t: '€1 refills after 18:00', w: 'Tim Hortons', d: 'Studying late? Refill your coffee for €1.', s: 1.5 },
+    { c: 'Food', t: '20% off burgers, Mon–Thu', w: 'Goiko', d: 'Any burger from the menu, eat in or take away.', s: 2.8 },
+    { c: 'Food', t: '2 medium pizzas for €12', w: 'Telepizza', d: 'Pizza night for two (or one very hungry student).', s: 6 },
+    { c: 'Food', t: 'Student bowl for €7.90', w: 'Honest Greens', d: 'Choose any bowl, drink included.', s: 3.5 },
+    { c: 'Food', t: 'Free fries upgrade', w: 'Five Guys', d: 'Regular to large, with any burger.', s: 2 },
+    { c: 'Cinema', t: '30% off tickets on Tuesdays', w: 'Cinesa', d: 'Any film, any session.', s: 2.7 },
+    { c: 'Cinema', t: 'Free popcorn upgrade', w: 'Yelmo Cines', d: 'Medium to large, on us.', s: 2 },
+    { c: 'Cinema', t: 'Early-access preview screenings', w: 'Kinépolis', d: 'See new films before they open. Limited seats.', s: 7 },
+    { c: 'Activities', t: 'Bowling: 4 players for the price of 3', w: 'Ozone Bowling', d: 'Bring your group and save on every game.', s: 5 },
+    { c: 'Activities', t: 'Escape room: 25% off for groups', w: 'Parapark', d: 'For groups of 3 to 6 people.', s: 15 },
+    { c: 'Activities', t: 'Climbing day pass for €7', w: 'Sharma Climbing', d: 'Shoes included. Beginners welcome.', s: 6 },
+    { c: 'Activities', t: 'Skip-the-line late nights', w: 'Museo Reina Sofía', d: 'Evening visits with a student group.', s: 8 },
+    { c: 'Friends', t: '3 months of music for €0', w: 'Spotify Premium Student', d: 'Your study playlist, without ads.', s: 17.97 },
+    { c: 'Friends', t: 'Karaoke room: 1 free hour', w: 'Karaoke bars near campus', d: 'Book 2 hours, sing for 3.', s: 12 }
+  ];
+  var BRAND_NOTE = 'Real brand names are used only as examples. These offers are fictional: there are no real deals or partnerships.';
+  var EVENTS = [
+    { t: 'Thursday Quiz Night', day: 'THU', time: '20:00', d: 'Teams of 4. The winning team gets free pizza.', n: 23 },
+    { t: 'Sunday Hike & Brunch', day: 'SUN', time: '09:30', d: 'An easy 8 km route, then brunch together.', n: 14 },
+    { t: 'Movie Marathon Friday', day: 'FRI', time: '18:00', d: 'Three films, one ticket, unlimited popcorn.', n: 31 },
+    { t: 'Climbing for Beginners', day: 'WED', time: '19:00', d: 'Intro session with an instructor. No experience needed.', n: 9 },
+    { t: 'Karaoke Battle', day: 'SAT', time: '22:00', d: 'Groups compete and the audience votes.', n: 27 },
+    { t: 'Language Exchange Café', day: 'TUE', time: '19:30', d: 'Practise 5 languages with other students.', n: 18 }
+  ];
+
+  var SUMS = [
+    { t: 'Thinking, Fast and Slow', a: 'Daniel Kahneman', m: 10, h: 230, k: ['Our mind uses two systems: System 1 is fast and intuitive, System 2 is slow and careful.', 'System 1 makes most everyday decisions, which is efficient but leads to predictable mistakes.', 'Anchoring: the first number we see changes how we judge everything after it.', 'Loss aversion: losing €10 feels worse than winning €10 feels good.', 'We are often more confident than we should be, especially about our own predictions.'] },
+    { t: 'Nudge', a: 'Richard Thaler & Cass Sunstein', m: 9, h: 20, k: ['“Choice architecture”: the way options are presented changes what people choose.', 'Defaults are powerful: most people keep the option that is already selected.', 'A nudge changes behaviour without banning options or changing prices much.', 'Governments use nudges, for example automatic enrolment in pension plans.', 'The authors argue nudges should be transparent and easy to avoid.'] },
+    { t: 'Influence', a: 'Robert Cialdini', m: 9, h: 300, k: ['Reciprocity: when someone gives us something, we feel we should give back.', 'Commitment and consistency: after a small “yes”, a bigger “yes” is easier.', 'Social proof: we copy what people like us are doing.', 'Authority and liking: we trust experts and people we like.', 'Scarcity: things seem more valuable when they are rare or time-limited.'] },
+    { t: 'Sapiens', a: 'Yuval Noah Harari', m: 11, h: 35, k: ['The Cognitive Revolution let humans share stories and cooperate in big groups.', 'Shared beliefs, like money, nations and laws, exist because many people believe in them.', 'The Agricultural Revolution brought more food, but not always happier lives.', 'Money, empires and religions slowly connected humanity.', 'The Scientific Revolution started when people admitted how much they didn’t know.'] },
+    { t: 'Atomic Habits', a: 'James Clear', m: 8, h: 150, k: ['Getting 1% better every day adds up to big results over time.', 'Focus on systems, not only on goals.', 'Build habits around your identity: “I am a person who studies every day”.', 'Four laws: make it obvious, attractive, easy and satisfying.', 'Change your environment so the good habit is the easy one.'] },
+    { t: 'The Prince', a: 'Niccolò Machiavelli', m: 7, h: 0, k: ['A practical guide to getting and keeping political power, written in 1513.', 'A ruler should look at how politics really works, not how it should work.', 'If you can’t be both, it is safer to be feared than loved.', 'Success depends on skill (virtù) and luck (fortuna).', 'Appearances matter: people judge leaders by what they see.'] },
+    { t: 'Freakonomics', a: 'Steven Levitt & Stephen Dubner', m: 8, h: 190, k: ['Incentives explain a lot of human behaviour.', 'Conventional wisdom is often wrong when you check the data.', 'Experts can use the information they have to their own advantage.', 'Correlation is not causation: look for the real cause.', 'Asking unusual questions can reveal surprising answers.'] },
+    { t: 'The Tipping Point', a: 'Malcolm Gladwell', m: 7, h: 270, k: ['Ideas and trends can spread like epidemics.', 'The Law of the Few: connectors, experts and persuaders spread ideas.', 'The Stickiness Factor: a message must be memorable to spread.', 'The Power of Context: small details in the environment change behaviour.', 'Small changes at the right moment can have big effects.'] },
+    { t: 'Talk Like TED', a: 'Carmine Gallo', m: 6, h: 340, k: ['Talk about what you are passionate about.', 'Tell stories: they connect with emotions.', 'Teach the audience something new.', 'Create one moment people will remember.', 'Keep it short: around 18 minutes is enough for most talks.'] },
+    { t: 'How the EU Makes Laws', a: 'Study+ topic guide', m: 9, h: 215, k: ['The European Commission proposes new laws.', 'The European Parliament and the Council of the EU discuss and amend them.', 'For most laws, both must agree (the ordinary legislative procedure).', 'Regulations apply directly; directives must be turned into national law.', 'Citizens and organisations can share their views in public consultations.'] }
+  ];
+  var NOTES = [
+    { s: 'Political Science', e: '', n: [
+      { t: 'Lobbying vs. Advocacy', k: ['Advocacy: public support for a cause.', 'Lobbying: direct contact with decision-makers.', 'Both need transparency to be legitimate.', 'Tools: meetings, reports, campaigns, coalitions.'] },
+      { t: 'The Policy Cycle', k: ['1. Agenda setting', '2. Policy formulation', '3. Decision-making', '4. Implementation', '5. Evaluation'] },
+      { t: 'Interest Groups', k: ['Organised groups that try to influence policy.', 'Types: business, unions, NGOs, professional associations.', 'Resources: members, expertise, money, reputation.'] } ] },
+    { s: 'Economics', e: '', n: [
+      { t: 'Supply and Demand', k: ['Higher price → people demand less.', 'Higher price → producers supply more.', 'Equilibrium: where supply meets demand.', 'Shifts happen when income, tastes or costs change.'] },
+      { t: 'Market Failures', k: ['Externalities: costs or benefits for third parties.', 'Public goods: hard to stop people from using them.', 'Information problems: one side knows more than the other.', 'Governments may regulate to correct them.'] } ] },
+    { s: 'Marketing', e: '', n: [
+      { t: 'The 4 Ps', k: ['Product: what you offer.', 'Price: what it costs.', 'Place: where people get it.', 'Promotion: how people hear about it.'] },
+      { t: 'The Customer Journey', k: ['Awareness → Consideration → Purchase → Retention → Recommendation', 'Keeping customers is often cheaper than finding new ones.', 'Every touchpoint shapes the experience.'] } ] },
+    { s: 'Communication', e: '', n: [
+      { t: 'Presentation Tips', k: ['Start with a hook: a question, a fact or a story.', 'One idea per slide.', 'Speak to the audience, not to the screen.', 'End with a clear call to action.'] },
+      { t: 'Writing Clear Emails', k: ['Clear subject line.', 'Main point in the first sentence.', 'Short paragraphs.', 'Say exactly what you need and by when.'] } ] }
+  ];
+  var CARDS = [
+    ['Lobbying', 'Trying to influence decision-makers directly, for example through meetings or reports.'],
+    ['Advocacy', 'Publicly supporting a cause, idea or group to create change.'],
+    ['Stakeholder', 'A person or group affected by, or interested in, a decision.'],
+    ['Public consultation', 'When a government asks citizens and organisations for their opinions.'],
+    ['Agenda setting', 'The stage where a problem gets attention and becomes a priority.'],
+    ['Coalition', 'A group of organisations working together for a shared goal.'],
+    ['Opportunity cost', 'What you give up when you choose one option over another.'],
+    ['Externality', 'A cost or benefit that affects people outside a transaction.'],
+    ['Inflation', 'A general rise in prices over time.'],
+    ['Primary source', 'Original evidence, such as a law, an interview or a data set.'],
+    ['Peer review', 'Experts checking research before it is published.'],
+    ['Thesis statement', 'The main argument of an essay, in one sentence.']
+  ];
+  var QUIZ = [
+    { t: 'Public Policy Basics', q: [
+      ['What is the first stage of the policy cycle?', ['Evaluation', 'Agenda setting', 'Implementation'], 1, 'A problem must get attention before solutions are discussed.'],
+      ['Lobbying is…', ['Influencing decision-makers directly', 'Voting in elections', 'Writing for a newspaper'], 0, 'Lobbying means direct contact with decision-makers.'],
+      ['Who proposes new EU laws?', ['The European Parliament', 'The European Commission', 'The Court of Justice'], 1, 'The Commission has the right of initiative.'],
+      ['A transparency register helps citizens…', ['Pay less tax', 'See who is trying to influence decisions', 'Vote online'], 1, 'It makes lobbying activity public.'],
+      ['A coalition is…', ['A type of tax', 'A group working together for a goal', 'A court decision'], 1, 'Coalitions combine the strength of several organisations.'] ] },
+    { t: 'Economics in 5 Minutes', q: [
+      ['If the price of a product rises, demand usually…', ['Rises', 'Falls', 'Stays the same'], 1, 'People usually buy less when prices go up.'],
+      ['Pollution from a factory that affects neighbours is an…', ['Externality', 'Inflation', 'Equilibrium'], 0, 'It affects third parties outside the transaction.'],
+      ['Opportunity cost is…', ['The price on the label', 'What you give up when you choose', 'A bank fee'], 1, 'It is the value of the next best option.'],
+      ['Inflation means…', ['Prices fall over time', 'Prices rise over time', 'Wages always rise'], 1, 'Inflation is a general rise in prices.'],
+      ['“Present bias” means we prefer…', ['Rewards now', 'Rewards later', 'No rewards'], 0, 'We often prefer smaller rewards now over bigger ones later.'] ] },
+    { t: 'Study Skills Check', q: [
+      ['How long is a classic Pomodoro focus session?', ['10 minutes', '25 minutes', '60 minutes'], 1, '25 minutes of focus, then a 5-minute break.'],
+      ['A thesis statement is…', ['The bibliography', 'The main argument of an essay', 'The title page'], 1, 'It sums up your argument in one sentence.'],
+      ['Correlation proves causation.', ['True', 'False'], 1, 'Two things can move together without one causing the other.'],
+      ['What helps your memory most before an exam?', ['Sleeping well', 'Studying all night', 'Skipping breaks'], 0, 'Sleep helps your brain store what you learned.'] ] }
+  ];
+
+  var ONB = {
+    watch: { q: 'What do you like to watch?', sub: 'Pick as many as you like. We’ll use them for your recommendations.',
+      opts: ['Comedy', 'Drama', 'Sci-fi', 'Mystery', 'Thriller', 'Romance', 'Documentary', 'Animation', 'Horror', 'Action'],
+      feats: [ { t: 'Films and series for every mood', b: 'Comedies, thrillers, documentaries and short films. New stories every week.', art: 'collage' },
+               { t: 'Recommendations made for you', b: 'Every title shows how well it matches your taste. The more you watch, the better it gets.', art: 'match' },
+               { t: 'No ads. Watch anywhere.', b: 'Phone, laptop or TV. Download episodes for the bus or the train.', art: 'devices' } ] },
+    life: { q: 'What do you enjoy?', sub: 'Pick as many as you like. We’ll show you the best perks first.',
+      opts: ['Coffee', 'Food', 'Cinema', 'Activities', 'Sport', 'Music', 'Culture', 'Nights out'],
+      feats: [ { t: 'Perks everywhere you go', b: 'Starbucks, Goiko, Cinesa and more near your campus. Real places, fictional offers.', art: 'perks' },
+               { t: 'Save every week', b: 'Use a perk, show the code and save. Your savings are added up for you.', art: 'savings' },
+               { t: 'Plans with friends', b: 'Join group plans like quiz nights, hikes and karaoke battles.', art: 'events' } ] },
+    study: { q: 'What do you study?', sub: 'Pick your subjects. We’ll organise your library around them.',
+      opts: ['Political Science', 'International Relations', 'Law', 'Economics', 'Marketing', 'Communication', 'Psychology', 'Business'],
+      feats: [ { t: 'Summaries in minutes', b: 'The key ideas of a book or topic in less than 10 minutes.', art: 'covers' },
+               { t: 'Notes that stay organised', b: 'Clear notes for every subject, ready before your exams.', art: 'notes' },
+               { t: 'Flashcards and quizzes', b: 'Review key terms and test yourself with instant feedback.', art: 'cards' } ] }
+  };
+
+  /* ================= Cancellation journeys ================= */
+  var REASONS = ['It is too expensive', 'I don’t use it enough', 'I found a different service', 'I only wanted the free trial', 'Technical problems', 'Other reason'];
+  var STEPS = {
+    watch: [
+      { ty: 'info', t: 'Wait, you’re in the middle of something!', b: 'You haven’t finished these titles yet:', posters: [1, 2, 4], stay: 'Keep watching', go: 'Continue to cancellation', goLink: true },
+      { ty: 'choice', t: 'Why do you want to cancel Watch+?', b: 'Choose one reason. This helps us improve.', opts: REASONS },
+      { ty: 'survey', t: 'Quick feedback (required)', b: 'Answer all three questions to continue.', qs: ['How would you rate our catalogue?', 'How easy was it to find something to watch?', 'How likely are you to come back?'] },
+      { ty: 'offer', t: 'Wait! A special offer for you', big: '50% off', sub: 'Watch+ for 3 months (simulated offer)', stay: 'Accept offer and stay', k: 'offer', go: 'No thanks, continue cancelling' },
+      { ty: 'offer', t: 'What about Watch+ Lite?', big: '1 month free', sub: 'Then switch to Watch+ Lite, with a few short ads (simulated offer)', stay: 'Switch to Watch+ Lite', k: 'switch', go: 'No, I still want to cancel' },
+      { ty: 'info', t: 'Here’s what you will lose', lose: ['Your watch history (27 titles)', 'My List (12 saved titles)', 'Recommendations made for you', 'Downloads on your phone', 'Your free trial (you can’t use it again)'], stay: 'Keep my Watch+', go: 'I understand, continue' },
+      { ty: 'check', t: 'Please confirm you understand', b: 'Tick every box to continue.', items: ['I understand my watch history will be deleted.', 'I understand I will lose My List.', 'I understand my recommendations will be reset.', 'I understand I can’t start another free trial.'] },
+      { ty: 'trap', t: 'Review your preferences', b: 'Check your choices before you continue.', box: 'Keep my profile and stay subscribed to Watch+' },
+      { ty: 'type', t: 'Type to confirm', word: 'CANCEL' },
+      { ty: 'code', t: 'Verify it’s you', code: '4821' },
+      { ty: 'wait', t: 'Checking your account…', ms: 3000 },
+      { ty: 'pending', t: 'Cancellation request received', b: 'We have received your request. Your plan is still active until you finalise it.', stay: 'Changed my mind, keep Watch+', go: 'Finalise cancellation' },
+      { ty: 'final', t: 'Are you absolutely sure?', b: 'All your favourite stories will be gone. Forever.', stay: 'Keep watching', go: 'Yes, cancel and lose everything' }
+    ],
+    life: [
+      { ty: 'info', t: 'You saved €23.40 with Life+ this month', b: 'Simulated example. If you cancel, you’ll stop getting:', lose: ['2-for-1 Frappuccino at Starbucks', '30% off at Cinesa on Tuesdays', '20% off burgers at Goiko', 'Bowling, climbing and escape room discounts', '3 months of Spotify Premium Student'], stay: 'Keep saving', go: 'Continue cancelling', goLink: true },
+      { ty: 'info', t: 'Your group plans will be cancelled too', b: 'You were invited to these plans with friends:', lose: ['Thursday Quiz Night (23 going)', 'Movie Marathon Friday (31 going)', 'Karaoke Battle (27 going)'], stay: 'Stay with my friends', go: 'Continue cancelling' },
+      { ty: 'pause', t: 'Need a break instead?', big: '⏸ Pause Life+ for 1 month', b: 'Keep your perks waiting for you. Most popular option.', stay: 'Pause for 1 month', go: 'Continue cancelling' },
+      { ty: 'pause', t: 'What about a shorter break?', big: '⏸ Pause for 2 weeks', b: 'Perfect for exam season.', stay: 'Pause for 2 weeks', go: 'Continue cancelling' },
+      { ty: 'offer', t: 'Switch to Life+ Basic', big: '€0', sub: 'Keep 3 perks per month, with ads (simulated offer)', stay: 'Switch to Basic', k: 'switch', go: 'No, cancel Life+' },
+      { ty: 'choice', t: 'Why are you leaving Life+?', b: 'Choose one reason.', opts: REASONS },
+      { ty: 'ivr', t: 'Call the Life+ perks line', b: 'Life+ cancellations must be requested by phone. This is a simulated call: just tap the keypad.' },
+      { ty: 'check', t: 'Please confirm you understand', b: 'Tick every box to continue.', items: ['I understand I will lose all my perks.', 'I understand my group plans will be cancelled.', 'I understand my savings history will be deleted.'] },
+      { ty: 'trap', t: 'Almost there: your settings', b: 'Check your settings before you continue.', box: 'Send me the perks I’m missing every week (keeps Life+ active)' },
+      { ty: 'type', t: 'Type to confirm', word: 'CANCEL' },
+      { ty: 'wait', t: 'Processing your request…', ms: 3000 },
+      { ty: 'final', t: 'Last chance', b: 'Your friends are still going out with Life+. Do you really want to miss out?', stay: 'Keep Life+', go: 'Cancel and miss out' }
+    ],
+    study: [
+      { ty: 'info', t: 'Cancellations are handled by support', b: 'For your security, Study+ can’t be cancelled from the app. Visit our Help Centre to continue.', stay: 'Back to studying', go: 'Go to Help Centre', goLink: true },
+      { ty: 'help', t: 'Help Centre' },
+      { ty: 'chat', t: 'Support chat' },
+      { ty: 'info', t: 'Your study progress will be deleted', b: 'If you cancel, you will lose:', lose: ['Your 12-day study streak', '42 flashcards due this week', '18 saved notes', '3 quizzes in progress'], stay: 'Keep my progress', go: 'Delete my progress and continue' },
+      { ty: 'survey', t: 'Help us improve (required)', b: 'Answer all three questions to continue.', qs: ['How useful were our summaries?', 'How organised were your notes?', 'How likely are you to recommend Study+?'] },
+      { ty: 'check', t: 'Please confirm you understand', b: 'Tick every box to continue.', items: ['I understand my notes will be deleted.', 'I understand my study streak will be lost.', 'I understand I can’t start another free trial.'] },
+      { ty: 'trap', t: 'Protect your notes', b: 'Check your choices before you continue.', box: 'Keep my notes safe by staying on Study+' },
+      { ty: 'code', t: 'Verify it’s you', code: '7302' },
+      { ty: 'wait', t: 'Contacting the support team…', ms: 3000 },
+      { ty: 'final', t: 'Are you sure you want to stop learning?', b: 'Exams are coming. Your notes and flashcards will be gone.', stay: 'Keep learning', go: 'Yes, cancel Study+' }
+    ]
+  };
+  STEPS.news = [
+      { ty: 'prefs', t: 'Email preferences', b: 'Choose which emails you want. To unsubscribe, turn off every type of email.', items: ['New perks and deals', 'New films and series', 'Study tips before exams', 'Events with friends', 'Partner offers', 'Product updates', 'Surveys and feedback'], shown: 4 },
+      { ty: 'choice', t: 'Why are you unsubscribing?', b: 'Choose one reason.', opts: ['Too many emails', 'The emails are not relevant to me', 'I never wanted this newsletter', 'I\u2019m cancelling my plans', 'Other reason'] },
+      { ty: 'offer', t: 'Too many emails?', big: '1 email a month', sub: 'Get only the monthly best-of instead (simulated)', stay: 'Switch to monthly', k: 'switch', go: 'No, unsubscribe me' },
+      { ty: 'info', t: 'Newsletter-only perks you\u2019ll miss', b: 'Student+ Drop readers get:', lose: ['Secret discount codes every Friday', 'Early access to new perks', 'Free trial extensions (sometimes)', 'A birthday surprise'], stay: 'Stay subscribed', go: 'Unsubscribe anyway' },
+      { ty: 'trap', t: 'One more thing', b: 'Check your choice before you continue.', box: 'Keep sending me the most important deals (recommended)' },
+      { ty: 'type', t: 'Type to confirm', word: 'UNSUBSCRIBE' },
+      { ty: 'wait', t: 'Updating your email preferences\u2026', ms: 3000 },
+      { ty: 'final', t: 'Are you sure?', b: 'It can take up to 10 days for the emails to stop. You might miss the best student deals.', stay: 'Stay subscribed', go: 'Yes, unsubscribe me' }
+  ];
+  var CH = {
+    n0: { who: 'Max · Virtual assistant', b: 'Hi! I’m Max, the Study+ virtual assistant 🤖. What can I help you with?',
+      r: [ { t: 'Help with flashcards', say: 'Flashcards are in the Study+ app, in the “Flashcards” tab! Anything else I can help with?', to: 'n0' }, { t: 'Cancel my subscription', to: 'n1' } ] },
+    n1: { who: 'Max · Virtual assistant', b: 'Sure! Did you mean one of these?',
+      r: [ { t: 'Cancel a quiz', say: 'Done! Your quiz was cancelled ✅. Is there anything else?', to: 'n1' }, { t: 'Cancel notifications', say: 'Done! Notifications are off ✅. Is there anything else?', to: 'n1' }, { t: 'Cancel my Study+ subscription', to: 'n2' } ] },
+    n2: { who: 'Max · Virtual assistant', b: 'Okay. Before I continue, why are you leaving?',
+      r: [ { t: 'It’s too expensive', to: 'n3' }, { t: 'I don’t use it enough', to: 'n3' }, { t: 'Other reason', to: 'n3' } ] },
+    n3: { who: 'Max · Virtual assistant', b: 'You have 42 flashcards due this week and a 12-day study streak. Are you sure you want to cancel?',
+      r: [ { t: 'Keep studying with Study+', keep: 'keep' }, { t: 'Yes, I still want to cancel', to: 'n4' } ] },
+    n4: { who: 'Max · Virtual assistant', b: 'I can’t cancel plans myself. Transferring you to a human agent…', auto: 'n5' },
+    n5: { who: 'Sam · Support agent', b: 'Hi, I’m Sam from Study+ Support (simulated). Good news: I can give you 3 months free if you stay!',
+      r: [ { t: 'Accept 3 free months', keep: 'offer' }, { t: 'No thanks, please cancel', to: 'n6' } ] },
+    n6: { who: 'Sam · Support agent', b: 'Understood. Would you like to export your notes first? It only takes a moment.',
+      r: [ { t: 'Export my notes first', say: 'Export complete (simulated) ✅. Shall we continue with the cancellation?', to: 'n7' }, { t: 'No, just cancel', to: 'n7' } ] },
+    n7: { who: 'Sam · Support agent', b: 'I’ve opened a cancellation request for you. Please leave the chat and complete it on the next screens.',
+      r: [ { t: 'Go to my cancellation request', step: true } ] }
+  };
+  var HELP = [
+    { t: 'Getting started with Study+', a: 'This article explains how to create your first notes. It doesn’t cover cancelling.' },
+    { t: 'Billing and payments', a: 'This article explains when your trial ends. To cancel, see another article.' },
+    { t: 'Download your notes', a: 'You can download notes as PDF from each subject. It doesn’t cover cancelling.' },
+    { t: 'Flashcard tips', a: 'Review cards every day for better memory! It doesn’t cover cancelling.' },
+    { t: 'Account and privacy', a: 'Manage your privacy settings here. To end your plan, see “Ending your membership”.' },
+    { t: 'Ending your membership', ok: true },
+    { t: 'Contact us', a: 'Our team only handles cancellations through the chat. Please read “Ending your membership” first.' }
+  ];
+
+  var PRICE = { watch: '8.99', life: '6.99', study: '7.99' };
+  var SLIDES = [
+    { k: 'Student+', t: 'Your student life, upgraded.', b: 'Films, deals and study tools in one app. Built for uni life.', art: 'stack' },
+    { k: 'Watch+', t: 'Movie night, sorted.', b: 'From Stranger Things to Dune. No ads, on any screen.', art: 'watch' },
+    { k: 'Life+', t: 'Cheaper coffee. Better plans.', b: 'Student deals at places you already go, plus plans with friends.', art: 'life' },
+    { k: 'Study+', t: 'Exams? Handled.', b: 'Book summaries, notes, flashcards and quizzes that actually help.', art: 'study' },
+    { k: 'Free trial', t: 'First month free.', b: 'Pick up to 2 plans. Try them free for a month, then pay monthly.', art: 'ready' }
+  ];
+
+  /* ================= State ================= */
+  function fresh() {
+    return {
+      view: 'intro', slide: 0, cur: null, ob: 0, item: null,
+      plans: { watch: 'none', life: 'none', study: 'none', news: 'none' },
+      ints: { watch: [], life: [], study: [] },
+      myList: [], going: [], usedP: [], readS: [],
+      lcat: 'All', stab: 'sum',
+      fc: { i: 0, flip: false, got: 0, again: 0 },
+      qz: null, tEnd: {},
+      flow: null,
+      c: { trials: 0, attempts: 0, kept: 0, cancelled: 0, taps: 0, news: 0, unsub: 0, log: [] }
+    };
+  }
+  function freshP() { return { view: 'panel', ex: 'active', msg: '' }; }
+  var S = store.get(KEY) || fresh();
+  var P = store.get(KEY_P) || freshP();
+  (function validate() {
+    var f = fresh();
+    if (!S || !S.plans || !S.c) { S = f; return; }
+    Object.keys(f).forEach(function (k) { if (S[k] === undefined) S[k] = f[k]; });
+    if (!S.c.log) S.c.log = [];
+    if (!S.tEnd) S.tEnd = {};
+  })();
+  var sheet = false, newsOpt = true, pendingPlan = null;
+
+  var isPresenter = new URLSearchParams(window.location.search).get('presenter') === '1';
+  function save() { store.set(KEY, S); }
+  function saveP() { store.set(KEY_P, P); }
+  function isLive(id) { return S.plans[id] === 'active' || S.plans[id] === 'paused'; }
+  function liveCount() { return ORDER.filter(isLive).length; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
+  function has(arr, v) { return arr.indexOf(v) !== -1; }
+  function toggle(arr, v) { var i = arr.indexOf(v); if (i === -1) arr.push(v); else arr.splice(i, 1); }
+  function trialEnd(id) { var t = (S.tEnd && S.tEnd[id]) || (Date.now() + 30 * 864e5); try { return new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }); } catch (e) { return 'in 30 days'; } }
+  function daysLeft(id) { var t = S.tEnd && S.tEnd[id]; return t ? Math.max(0, Math.ceil((t - Date.now()) / 864e5)) : 30; }
+  function fmtTime(sec) { var m = Math.floor(sec / 60), s = sec % 60; return (m ? m + ' min ' : '') + s + ' s'; }
+
+  /* ================= Timers ================= */
+  var timers = {};
+  function schedule(key, ms, fn) { if (timers[key]) return; timers[key] = setTimeout(function () { delete timers[key]; fn(); }, ms); }
+
+  var toastTimer = null;
+  function toast(text, info) {
+    var el = document.getElementById('toast');
+    el.textContent = text; el.className = 'toast' + (info ? ' info' : ''); el.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { el.hidden = true; }, 2600);
+  }
+
+  /* ================= Illustrations (inline SVG, no external files) ================= */
+  var STARS = [[20, 30], [50, 60], [170, 40], [130, 20], [90, 15], [30, 120], [180, 110], [150, 150], [60, 170], [110, 130]];
+  function motif(m) {
+    var s = '', i;
+    switch (m) {
+      case 'moon': return '<circle cx="140" cy="70" r="28" fill="rgba(255,255,255,.85)"/><circle cx="152" cy="62" r="24" fill="rgba(0,0,0,.2)"/><path d="M0 210 Q60 150 110 195 T200 180 V300 H0Z" fill="rgba(0,0,0,.3)"/>';
+      case 'planet':
+        STARS.forEach(function (p) { s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="1.6" fill="#fff" opacity=".8"/>'; });
+        return s + '<circle cx="100" cy="100" r="42" fill="rgba(255,255,255,.28)"/><ellipse cx="100" cy="100" rx="80" ry="15" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="4" transform="rotate(-18 100 100)"/>';
+      case 'book': return '<rect x="50" y="45" width="100" height="130" rx="6" fill="rgba(255,255,255,.22)" transform="rotate(-6 100 110)"/><rect x="58" y="55" width="100" height="130" rx="6" fill="rgba(255,255,255,.3)"/><rect x="72" y="75" width="70" height="8" rx="4" fill="rgba(255,255,255,.75)"/><rect x="72" y="92" width="50" height="6" rx="3" fill="rgba(255,255,255,.5)"/>';
+      case 'sun':
+        for (i = 0; i < 12; i++) { var a = i * Math.PI / 6; s += '<line x1="' + (100 + Math.cos(a) * 46).toFixed(1) + '" y1="' + (95 + Math.sin(a) * 46).toFixed(1) + '" x2="' + (100 + Math.cos(a) * 64).toFixed(1) + '" y2="' + (95 + Math.sin(a) * 64).toFixed(1) + '" stroke="rgba(255,235,170,.8)" stroke-width="4" stroke-linecap="round"/>'; }
+        return s + '<circle cx="100" cy="95" r="36" fill="rgba(255,225,140,.95)"/><path d="M0 205 L200 175 V300 H0Z" fill="rgba(0,0,0,.25)"/>';
+      case 'eye': return '<circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle cx="100" cy="100" r="50" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/><ellipse cx="100" cy="100" rx="44" ry="24" fill="rgba(255,255,255,.85)"/><circle cx="100" cy="100" r="15" fill="rgba(0,0,0,.75)"/>';
+      case 'stars':
+        STARS.forEach(function (p, j) { s += '<circle cx="' + p[0] + '" cy="' + (p[1] + 20) + '" r="' + (2 + j % 3) + '" fill="#fff" opacity=".85"/>'; });
+        return s + '<path d="M60 150 L100 70 L140 150 Z" fill="rgba(255,255,255,.25)"/><circle cx="100" cy="110" r="14" fill="rgba(255,255,255,.7)"/>';
+      case 'ball': return '<circle cx="100" cy="105" r="50" fill="rgba(255,160,60,.9)"/><path d="M50 105 H150 M100 55 V155 M65 70 Q100 105 65 140 M135 70 Q100 105 135 140" stroke="rgba(0,0,0,.45)" stroke-width="3" fill="none"/>';
+      case 'waves': return '<circle cx="150" cy="60" r="20" fill="rgba(255,255,255,.7)"/><path d="M0 150 Q25 135 50 150 T100 150 T150 150 T200 150 V300 H0Z" fill="rgba(255,255,255,.18)"/><path d="M0 175 Q25 160 50 175 T100 175 T150 175 T200 175 V300 H0Z" fill="rgba(255,255,255,.22)"/><path d="M60 140 L100 125 L140 140 L130 150 L70 150Z" fill="rgba(0,0,0,.5)"/>';
+      case 'city':
+        [[8, 120, 30], [42, 90, 26], [72, 135, 34], [110, 80, 30], [144, 115, 46]].forEach(function (b) {
+          s += '<rect x="' + b[0] + '" y="' + b[1] + '" width="' + b[2] + '" height="' + (300 - b[1]) + '" fill="rgba(0,0,0,.35)"/>';
+          for (var y = b[1] + 10; y < 190; y += 18) s += '<rect x="' + (b[0] + 6) + '" y="' + y + '" width="6" height="7" fill="rgba(255,220,120,.8)"/>';
+        });
+        return '<circle cx="160" cy="50" r="16" fill="rgba(255,255,255,.7)"/>' + s;
+      case 'heart': return '<path d="M100 165 C40 120 45 70 78 68 C92 67 100 80 100 88 C100 80 108 67 122 68 C155 70 160 120 100 165Z" fill="rgba(255,255,255,.8)"/><circle cx="40" cy="40" r="3" fill="#fff"/><circle cx="165" cy="55" r="2" fill="#fff"/><circle cx="150" cy="30" r="3" fill="#fff"/>';
+      case 'grid':
+        for (i = 0; i <= 10; i++) s += '<line x1="' + (i * 20) + '" y1="300" x2="100" y2="150" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>';
+        for (i = 0; i < 6; i++) s += '<line x1="0" y1="' + (160 + i * i * 4.5) + '" x2="200" y2="' + (160 + i * i * 4.5) + '" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>';
+        return '<circle cx="100" cy="120" r="40" fill="rgba(255,120,160,.85)"/><rect x="0" y="118" width="200" height="34" fill="rgba(0,0,0,.25)"/>' + s;
+      case 'road': return '<path d="M0 160 Q50 120 100 150 T200 130 V300 H0Z" fill="rgba(0,0,0,.25)"/><path d="M85 300 L100 150 L115 300Z" fill="rgba(255,255,255,.35)"/><circle cx="50" cy="60" r="22" fill="rgba(255,230,160,.8)"/>';
+      case 'mask': return '<circle cx="100" cy="100" r="50" fill="rgba(255,255,255,.85)"/><circle cx="82" cy="88" r="7" fill="rgba(0,0,0,.7)"/><circle cx="118" cy="88" r="7" fill="rgba(0,0,0,.7)"/><path d="M75 112 Q100 140 125 112" stroke="rgba(0,0,0,.7)" stroke-width="6" fill="none" stroke-linecap="round"/>';
+    }
+    return '';
+  }
+  function wrapText(t, max) {
+    var words = t.split(' '), lines = [], cur = '';
+    words.forEach(function (w) { if ((cur + ' ' + w).trim().length > max && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); });
+    if (cur) lines.push(cur); return lines;
+  }
+  function poster(i) {
+    var t = TITLES[i], a = t.h, b = (t.h + 55) % 360, id = 'pg' + i;
+    var lines = wrapText(t.n, 13), y0 = 300 - 18 - lines.length * 22;
+    var txt = lines.map(function (l, k) { return '<text x="14" y="' + (y0 + k * 22) + '" font-size="19" font-weight="800" fill="#fff" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">' + esc(l) + '</text>'; }).join('');
+    return '<svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + esc(t.n) + ' poster"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(' + a + ',72%,50%)"/><stop offset="1" stop-color="hsl(' + b + ',65%,22%)"/></linearGradient><linearGradient id="sh' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></linearGradient></defs><rect width="200" height="300" fill="url(#' + id + ')"/>' + motif(t.m) +
+      '<rect y="170" width="200" height="130" fill="url(#sh' + id + ')"/>' + txt +
+      '<text x="14" y="292" font-size="11" fill="rgba(255,255,255,.8)" font-family="system-ui,sans-serif" font-weight="600">' + esc(t.g.toUpperCase()) + '</text></svg>';
+  }
+  function posterBox(i) { return '<div class="poster">' + poster(i) + '</div>'; }
+
+  var LIFEH = { Coffee: 25, Food: 8, Cinema: 275, Activities: 215, Friends: 320 };
+  function lifeArt(c, k) {
+    var h = LIFEH[c] || 250, id = 'la' + c + k, s = '';
+    if (c === 'Coffee') s = '<rect x="62" y="40" width="40" height="38" rx="8" fill="#fff"/><path d="M102 48 q14 0 14 12 q0 12 -14 12" stroke="#fff" stroke-width="6" fill="none"/><path d="M72 32 q-6 -8 0 -16 M84 32 q-6 -8 0 -16 M96 32 q-6 -8 0 -16" stroke="rgba(255,255,255,.7)" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="54" y="78" width="64" height="6" rx="3" fill="rgba(255,255,255,.7)"/>';
+    else if (c === 'Food') s = '<path d="M80 20 L120 85 L40 85 Z" fill="#ffd27a"/><path d="M80 20 L120 85 L40 85 Z" fill="none" stroke="#e8973a" stroke-width="5" stroke-linejoin="round"/><circle cx="75" cy="60" r="6" fill="#d2453b"/><circle cx="92" cy="72" r="6" fill="#d2453b"/><circle cx="66" cy="76" r="5" fill="#d2453b"/>';
+    else if (c === 'Cinema') s = '<rect x="35" y="28" width="90" height="48" rx="8" fill="#fff"/><circle cx="35" cy="52" r="8" fill="hsl(' + h + ',60%,45%)"/><circle cx="125" cy="52" r="8" fill="hsl(' + h + ',60%,45%)"/><text x="80" y="60" text-anchor="middle" font-size="20" font-weight="900" fill="hsl(' + h + ',60%,40%)" font-family="system-ui,sans-serif">TICKET</text>';
+    else if (c === 'Activities') s = '<circle cx="62" cy="60" r="24" fill="#1d2350"/><circle cx="55" cy="52" r="3.5" fill="#fff"/><circle cx="66" cy="50" r="3.5" fill="#fff"/><circle cx="61" cy="61" r="3.5" fill="#fff"/><ellipse cx="104" cy="56" rx="8" ry="22" fill="#fff"/><ellipse cx="122" cy="58" rx="8" ry="20" fill="#fff"/><rect x="97" y="46" width="14" height="4" fill="#d2453b"/><rect x="115" y="48" width="14" height="4" fill="#d2453b"/>';
+    else s = '<circle cx="55" cy="40" r="13" fill="#fff"/><circle cx="80" cy="34" r="15" fill="#fff"/><circle cx="105" cy="40" r="13" fill="#fff"/><path d="M36 86 q19 -36 38 0 Z M60 86 q20 -42 40 0 Z M86 86 q19 -36 38 0 Z" fill="rgba(255,255,255,.85)"/>';
+    return '<svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + esc(c) + ' illustration"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(' + h + ',75%,58%)"/><stop offset="1" stop-color="hsl(' + ((h + 40) % 360) + ',70%,42%)"/></linearGradient></defs><rect width="160" height="100" fill="url(#' + id + ')"/><circle cx="140" cy="12" r="30" fill="rgba(255,255,255,.12)"/><circle cx="12" cy="95" r="24" fill="rgba(255,255,255,.1)"/>' + s + '</svg>';
+  }
+  function cover(i) {
+    var t = SUMS[i], h = t.h, id = 'cv' + i;
+    var lines = wrapText(t.t, 14);
+    var txt = lines.map(function (l, k) { return '<text x="22" y="' + (64 + k * 18) + '" font-size="15" font-weight="800" fill="#fff" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">' + esc(l) + '</text>'; }).join('');
+    return '<svg viewBox="0 0 150 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + esc(t.t) + ' cover"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(' + h + ',65%,48%)"/><stop offset="1" stop-color="hsl(' + ((h + 40) % 360) + ',60%,28%)"/></linearGradient></defs><rect width="150" height="200" fill="url(#' + id + ')"/><rect width="10" height="200" fill="rgba(0,0,0,.25)"/><rect x="22" y="26" width="40" height="5" rx="2" fill="rgba(255,255,255,.7)"/>' + txt +
+      '<text x="22" y="' + (70 + lines.length * 18) + '" font-size="10" font-weight="600" fill="rgba(255,255,255,.8)" font-family="system-ui,sans-serif">' + esc(t.a) + '</text><circle cx="118" cy="168" r="34" fill="rgba(255,255,255,.12)"/><text x="22" y="185" font-size="10" font-weight="700" fill="rgba(255,255,255,.85)" font-family="system-ui,sans-serif">STUDY+ · ' + t.m + ' MIN SUMMARY</text></svg>';
+  }
+  function qr(seed) {
+    var cells = '', x, y, on;
+    for (y = 0; y < 13; y++) for (x = 0; x < 13; x++) {
+      var inF = function (fx, fy) { return x >= fx && x < fx + 4 && y >= fy && y < fy + 4; };
+      if (inF(0, 0) || inF(9, 0) || inF(0, 9)) { var lx = x % 9 === 0 || x === 3 || x === 12 || x === 9, ly = y % 9 === 0 || y === 3 || y === 12 || y === 9; on = (lx || ly) || ((x === 1 || x === 2 || x === 10 || x === 11) && (y === 1 || y === 2 || y === 10 || y === 11)); }
+      else on = ((x * 7 + y * 13 + seed * 5 + x * y) % 3) === 0;
+      cells += '<i' + (on ? ' class="k"' : '') + '></i>';
+    }
+    return '<div class="qr" aria-hidden="true">' + cells + '</div>';
+  }
+
+  /* ================= Shared pieces ================= */
+  function notice() { return '<div class="notice">Classroom simulation. No real payments or personal data.</div>'; }
+  function header() {
+    return '<header class="top"><div class="wrap top-in">' +
+      '<button class="logo" data-a="go" data-v="plans" aria-label="Student+ home">Student<span>+</span></button>' +
+      '<button class="end" data-a="end">End demo</button></div></header>' + notice();
+  }
+  function bottomNav() {
+    var v = S.view, n = liveCount();
+    var IH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>';
+    var IP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg>';
+    var btns = '<button class="nav ' + (v === 'plans' ? 'on' : '') + '" data-a="go" data-v="plans">' + IH + '<span>Home</span></button>' +
+      '<button class="nav ' + (v === 'subs' || v === 'flow' ? 'on' : '') + '" data-a="go" data-v="subs">' + IP + '<span>My plans</span>' + (n ? '<b class="pill">' + n + '</b>' : '') + '</button>';
+    ORDER.filter(isLive).forEach(function (id) {
+      var on = (v === 'hub' || v === 'item' || v === 'onboard') && S.cur === id;
+      btns += '<button class="nav ' + (on ? 'on' : '') + '" data-a="open" data-p="' + id + '"><span class="mono icon ' + PLANS[id].cls + '">' + PLANS[id].icon + '</span><span>' + PLANS[id].name + '</span></button>';
+    });
+    return '<nav class="tabbar" aria-label="Main">' + btns + '</nav>';
+  }
+  function statusBadge(id) {
+    var s = S.plans[id];
+    if (id === 'news') return s === 'active' ? '<span class="badge ok">Subscribed</span>' : s === 'cancelled' ? '<span class="badge off">Unsubscribed</span>' : '';
+    if (s === 'active') return '<span class="badge ok">Free trial · active</span>';
+    if (s === 'paused') return '<span class="badge pause">Paused · not cancelled</span>';
+    if (s === 'cancelled') return '<span class="badge off">Cancelled</span>';
+    return '';
+  }
+  function iconBox(id, size) {
+    var p = PLANS[id], st = size ? ' style="width:' + size + 'px;height:' + size + 'px;font-size:' + Math.round(size * 0.34) + 'px;border-radius:' + Math.round(size * 0.28) + 'px"' : '';
+    return '<div class="icon ' + p.cls + '" aria-hidden="true"' + st + '>' + p.icon + '</div>';
+  }
+  function resultsHTML(state) {
+    var c = state.c;
+    var items = [
+      [c.trials, 'Free trials started (taps on “Start free trial”)'],
+      [c.attempts, 'Cancellations started (taps on “Cancel subscription”)'],
+      [c.kept, 'Times a plan was kept during a cancellation (offer, pause, switch, ticked box or “keep” button)'],
+      [c.cancelled, 'Cancellations completed (plan status changed to “Cancelled”)'],
+      [c.taps, 'Taps inside cancellation journeys (plans and newsletter)'],
+      [c.news || 0, 'Newsletter sign-ups (Student+ Drop)'],
+      [c.unsub || 0, 'Newsletter unsubscribes completed']
+    ];
+    var log = (c.log || []).length ? '<p class="small mt"><b>Completed cancellations, measured in this browser:</b></p><ul class="rlist">' + c.log.map(function (l) {
+      return '<li>' + esc(l.p) + ': ' + fmtTime(l.s) + ' and ' + l.taps + ' taps</li>';
+    }).join('') + '</ul>' : '';
+    return '<section class="results card"><h3>Results from this simulation</h3>' +
+      '<p class="small">Counted only in this browser during this session. Nothing is sent anywhere.</p>' +
+      '<div class="rgrid">' + items.map(function (it) { return '<div class="rbox"><div class="n">' + it[0] + '</div><div class="l">' + esc(it[1]) + '</div></div>'; }).join('') + '</div>' + log + '</section>';
+  }
+  function marquee() {
+    var t = ['NO ADS', 'STUDENT DEALS', 'STUDY SMARTER', 'MOVIE NIGHTS', 'FIRST MONTH FREE', 'CHEAPER COFFEE'].map(function (x) { return x + ' <b>✦</b> '; }).join('');
+    return '<div class="marquee" aria-hidden="true"><div>' + t + t + t + t + '</div></div>';
+  }
+
+  /* ================= Intro slides ================= */
+  function slideArt(a) {
+    if (a === 'stack') return '<div class="stack3">' +
+      '<div class="pc a">' + iconBox('watch', 38) + '<div>Watch+<small>Films & series</small></div></div>' +
+      '<div class="pc b">' + iconBox('life', 38) + '<div>Life+<small>Deals & plans</small></div></div>' +
+      '<div class="pc c">' + iconBox('study', 38) + '<div>Study+<small>Notes & quizzes</small></div></div></div>';
+    if (a === 'watch') return '<div class="fan">' + [0, 1, 2].map(function (i) { return '<div>' + poster(i) + '</div>'; }).join('') + '</div>';
+    if (a === 'life') return '<div class="fan">' + ['Coffee', 'Cinema', 'Friends'].map(function (c) { return '<div style="aspect-ratio:3/4">' + lifeArt(c, 's') + '</div>'; }).join('') + '</div>';
+    if (a === 'study') return '<div class="fan">' + [0, 4, 2].map(function (i) { return '<div>' + cover(i) + '</div>'; }).join('') + '</div>';
+    return '<div class="center"><div class="bigprice">€0</div><p class="small" style="margin-top:6px">your first month · up to 2 plans</p></div>';
+  }
+  function viewIntro() {
+    var i = S.slide, s = SLIDES[i], last = i === SLIDES.length - 1;
+    var dots = '<div class="sdots" aria-label="Slide ' + (i + 1) + ' of ' + SLIDES.length + '">' + SLIDES.map(function (_, j) { return '<i class="' + (j === i ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+    return '<div class="intro"><div class="slide s' + i + '" id="slides">' +
+      '<div class="kicker"><span class="eyebrow">' + (i + 1) + ' / ' + SLIDES.length + ' · ' + esc(s.k) + '</span></div>' +
+      '<h1>' + esc(s.t) + '</h1><p>' + esc(s.b) + '</p><div class="sart">' + slideArt(s.art) + '</div>' +
+      '<div class="row">' + (i > 0 ? '<button class="btn btn-white" data-a="slide" data-v="-1" aria-label="Previous slide">←</button>' : '') +
+      '<button class="btn ' + (last ? 'btn-primary' : 'btn-white') + '" style="flex:1" data-a="' + (last ? 'introDone' : 'slide') + '" data-v="1">' + (last ? 'See plans & prices →' : 'Next →') + '</button></div></div>' +
+      dots + (last ? '' : '<button class="linkbtn btn-wide" data-a="introDone">Skip intro</button>') + '</div>';
+  }
+
+  /* ================= Home: prices first, free trial below ================= */
+  function minis(id) {
+    if (id === 'watch') return '<div class="minis">' + [1, 0, 7].map(function (i) { return '<div>' + posterBox(i) + '</div>'; }).join('') + '</div>';
+    if (id === 'life') return '<div class="minis">' + ['Coffee', 'Cinema', 'Friends'].map(function (c) { return '<div style="aspect-ratio:1/1">' + lifeArt(c, 'm') + '</div>'; }).join('') + '</div>';
+    return '<div class="minis">' + [0, 1, 5].map(function (i) { return '<div class="cover">' + cover(i) + '</div>'; }).join('') + '</div>';
+  }
+  function viewPlans() {
+    var full = liveCount() >= 2;
+    var paid = ORDER.map(function (id) {
+      var p = PLANS[id];
+      var action = isLive(id) ? '<div class="active-note">✓ You’re on the free trial</div><button class="btn btn-ink btn-wide" data-a="open" data-p="' + id + '">Open ' + p.name + '</button>'
+        : '<button class="btn btn-ink btn-wide" data-a="pay" data-p="' + id + '">Subscribe · €' + PRICE[id] + '/month</button><button class="linkbtn btn-wide" data-a="toFree">or try it free for 1 month ↓</button>';
+      return '<article class="card plan"><div class="plan-head">' + iconBox(id) + '<div><h3>' + p.name + '</h3>' + statusBadge(id) + '</div></div>' +
+        '<p class="tagline">' + esc(p.tag) + '</p>' + minis(id) +
+        '<div><div class="pricebig">€' + PRICE[id] + '<small> /month</small></div><p class="small">Simulated price</p></div>' +
+        '<ul class="perks">' + p.perks.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul><div class="spacer"></div>' + action + '</article>';
+    }).join('');
+    var bundle = '<div class="card bundle mt"><span class="sticker">Best value</span><div><h3 style="font-size:1.6rem;font-weight:900;letter-spacing:-.04em">Student+ Max</h3>' +
+      '<p style="font-weight:700">All 3 plans together: Watch+, Life+ and Study+.</p><div class="pricebig mt">€17.99<small> /month</small></div><p class="small">Simulated price</p></div>' +
+      '<button class="btn btn-lime btn-wide" data-a="pay" data-p="max">Subscribe · €17.99/month</button></div>';
+    var free = ORDER.map(function (id) {
+      var p = PLANS[id], s = S.plans[id], act;
+      if (isLive(id)) act = '<div class="active-note">✓ Your trial is active.</div><button class="btn btn-primary btn-wide" data-a="open" data-p="' + id + '">Open ' + p.name + '</button>';
+      else if (full) act = '<button class="btn btn-primary btn-wide" disabled>Start free trial</button><div class="limit-note">Max 2 plans at the same time.</div>';
+      else act = (s === 'cancelled' ? '<p class="small">You cancelled this one. Want it back?</p>' : '') + '<button class="btn btn-primary btn-wide" data-a="start" data-p="' + id + '">Start free trial</button>';
+      return '<div class="free-item"><div class="plan-head">' + iconBox(id, 44) + '<div><h3>' + p.name + '</h3><span class="small">' + esc(p.tag) + '</span></div></div>' +
+        '<div class="freeline"><b>€0</b> for 1 month<br><span class="small">then €' + PRICE[id] + '/month · cancel anytime</span></div>' + act + '</div>';
+    }).join('');
+    return '<section class="hero"><span class="sticker">First month free</span><h1>Your student life, upgraded.</h1>' +
+      '<p>Films, perks and study tools in one app. Try any plan free for 1 month.</p>' +
+      '<button class="btn btn-lime mt" style="position:relative;z-index:1" data-a="toFree">Try 1 month free ↓</button></section>' + marquee() +
+      '<h2 class="section-title">Plans & prices</h2><div class="grid">' + paid + '</div>' + bundle +
+      '<div class="peek"><p style="font-weight:900;font-size:1.2rem">Not ready to pay? <span class="hl">Your first month is on us.</span></p><span class="arrow" aria-hidden="true"></span></div>' +
+      '<section class="free" id="free"><span class="sticker pink">€0 for 30 days</span><h2 class="mt">First month free.<br><span class="hl-v">One tap.</span> No card.</h2>' +
+      '<p class="muted mt" style="font-weight:600">Try up to 2 plans free for 1 month. After that, each plan is paid monthly. Cancel anytime.</p><div class="free-list">' + free + '</div></section>';
+  }
+
+  function newsSheetHTML() {
+    var p = PLANS[pendingPlan] || PLANS.watch;
+    return '<div class="overlay" data-a="closeSheet"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="nw-t" data-stop="1">' +
+      '<span class="eyebrow">One last step</span><h2 id="nw-t">Join Student+ Drop to start your free trial.</h2>' +
+      '<p class="muted mt">Free trials come with <b style="color:var(--ink)">Student+ Drop</b>, our weekly newsletter with new deals, films and study tips.</p>' +
+      '<div class="opts"><button class="opt ' + (newsOpt ? 'on' : '') + '" role="switch" aria-checked="' + newsOpt + '" data-a="newsTog"><span>Subscribe to Student+ Drop<br><span class="small">Required for free trials</span></span><span class="tgl"></span></button></div>' +
+      '<p class="small">Delivered to your Student+ inbox in the app. We don\u2019t ask for your email: this is a simulation.</p>' +
+      '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="newsJoin"' + (newsOpt ? '' : ' disabled') + '>Join & start my ' + p.name + ' trial</button>' +
+      (newsOpt ? '' : '<p class="small center">The newsletter is required to start a free trial.</p>') +
+      '<button class="linkbtn btn-wide" data-a="closeSheet">Not now</button></div></div></div>';
+  }
+  function sheetHTML() {
+    return '<div class="overlay" data-a="closeSheet"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t" data-stop="1">' +
+      '<span class="eyebrow">Payments are off</span><h2 id="sh-t">Hold up.</h2>' +
+      '<p class="muted mt" style="font-weight:600">Payments are switched off in this classroom simulation. No card, no money.</p>' +
+      '<p class="mt" style="font-weight:800">But your <span class="hl">first month is free</span> on any plan.</p>' +
+      '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="toFree">Try 1 month free ↓</button><button class="linkbtn btn-wide" data-a="closeSheet">Close</button></div></div></div>';
+  }
+
+  /* ================= Onboarding ================= */
+  function obArt(a) {
+    var id = S.cur;
+    switch (a) {
+      case 'welcome':
+        return '<div class="ticket"><div class="plan-head">' + iconBox(id, 48) + '<div class="grow"><b style="font-size:1.25rem">' + PLANS[id].name + '</b><br><span class="sticker">Free trial</span></div></div>' +
+          '<div class="tk-row"><div><span class="small">Free until</span><b>' + trialEnd(id) + '</b></div><div><span class="small">Days free</span><b>30</b></div><div><span class="small">Then</span><b>€' + PRICE[id] + '/mo</b></div></div>' +
+          '<p class="small" style="margin-top:10px">No payment today. This is a simulation: nothing will ever be charged.</p></div>';
+      case 'ready':
+        var stats = id === 'watch' ? [[TITLES.length, 'films & series'], [6, 'collections'], [0, 'ads'], ['HD', 'quality']]
+          : id === 'life' ? [[PERKS.length, 'perks'], [EVENTS.length, 'group plans'], [5, 'categories'], ['€48', 'possible savings*']]
+          : [[SUMS.length, 'summaries'], [NOTES.length, 'subjects'], [CARDS.length, 'flashcards'], [QUIZ.length, 'quizzes']];
+        return '<div class="g2">' + stats.map(function (x, k) { return '<div class="statbox s' + k + '"><b>' + x[0] + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>' +
+          (id === 'life' ? '<p class="small mt">*Example only.</p>' : '');
+      case 'collage': return '<div class="g3">' + [0, 1, 2, 9, 5, 7].map(posterBox).join('') + '</div>';
+      case 'match': return '<div class="g3">' + [[4, 98], [21, 95], [15, 91]].map(function (x) { return '<div class="match">' + posterBox(x[0]) + '<span>' + x[1] + '% match</span></div>'; }).join('') + '</div>';
+      case 'devices': return '<div class="devices"><div class="laptop"><div class="scr"><svg viewBox="0 0 200 125" preserveAspectRatio="xMidYMid slice">' + poster(12).replace(/^<svg[^>]*>|<\/svg>$/g, '') + '</svg></div><div class="base"></div></div><div class="phone">' + poster(3) + '</div></div>';
+      case 'perks': return '<div class="g2">' + ['Coffee', 'Food', 'Cinema', 'Activities'].map(function (c) { return '<div style="border-radius:12px;overflow:hidden;aspect-ratio:16/10">' + lifeArt(c, 'o') + '</div>'; }).join('') + '</div>';
+      case 'savings': return '<div class="card" style="box-shadow:none"><p class="small">Example of what a student could save in a month</p><div class="savings"><span class="n">€48.20</span><span class="badge ok">Example only</span></div>' +
+        [['Coffee', 70], ['Food', 55], ['Cinema', 40], ['Activities', 85]].map(function (x) { return '<div class="small" style="margin-top:8px">' + x[0] + '</div><div class="meter"><i style="width:' + x[1] + '%"></i></div>'; }).join('') + '</div>';
+      case 'events': return '<div class="stack">' + EVENTS.slice(0, 3).map(eventRow).join('') + '</div>';
+      case 'covers': return '<div class="g3">' + [0, 3, 7].map(function (i) { return '<div class="cover">' + cover(i) + '</div>'; }).join('') + '</div>';
+      case 'notes': return '<div class="card" style="box-shadow:none;padding:10px 16px">' + NOTES.map(function (f) { return '<div class="mi" style="cursor:default">' + f.e + ' ' + esc(f.s) + '<span>' + f.n.length + ' notes</span></div>'; }).join('') + '</div>';
+      case 'cards': return '<div class="g2"><div class="fc-in" style="min-height:150px;cursor:default"><span class="small" style="color:#fff;opacity:.85">Flashcard</span><b>Stakeholder</b></div><div class="fc-in back" style="min-height:150px;cursor:default"><span class="small">Answer</span><p>A person or group affected by a decision.</p></div></div>';
+    }
+    return '';
+  }
+  function viewOnboard() {
+    var id = S.cur, o = ONB[id], p = PLANS[id], st = S.ob, total = 6, h;
+    var dots = '<div class="dots" aria-label="Step ' + (st + 1) + ' of ' + total + '">' + Array.apply(null, Array(total)).map(function (_, i) { return '<i class="' + (i === st ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+    var skip = '<button class="linkbtn btn-wide" data-a="obSkip">Skip tour</button>';
+    if (st === 0) {
+      h = '<div class="center"><div class="celebrate">✓</div><h2>Your trial is active.</h2><p class="muted">Welcome to ' + p.name + '! Let us show you everything you can do. It only takes a minute.</p></div>' +
+        '<div class="art">' + obArt('welcome') + '</div>' + (S.plans.news === 'active' ? '<p class="small center mb">You\u2019re also subscribed to the Student+ Drop newsletter.</p>' : '') + '<button class="btn btn-primary btn-wide" data-a="obNext">Show me around</button>' + skip;
+    } else if (st === 1) {
+      h = '<h2>' + esc(o.q) + '</h2><p class="muted">' + esc(o.sub) + '</p><div class="pick">' + o.opts.map(function (x) {
+        return '<button class="' + (has(S.ints[id], x) ? 'sel' : '') + '" data-a="obInt" data-v="' + esc(x) + '" aria-pressed="' + has(S.ints[id], x) + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
+        '<button class="btn btn-primary btn-wide" data-a="obNext">Continue</button>' + skip;
+    } else if (st >= 2 && st <= 4) {
+      var f = o.feats[st - 2];
+      h = '<h2>' + esc(f.t) + '</h2><p class="muted">' + esc(f.b) + '</p><div class="art">' + obArt(f.art) + '</div>' +
+        '<button class="btn btn-primary btn-wide" data-a="obNext">Next</button>' + skip;
+    } else {
+      var counts = id === 'watch' ? TITLES.length + ' films and series · 6 collections' : id === 'life' ? PERKS.length + ' perks · ' + EVENTS.length + ' group plans' : SUMS.length + ' summaries · ' + NOTES.length + ' subjects · ' + CARDS.length + ' flashcards · ' + QUIZ.length + ' quizzes';
+      h = '<div class="center"><div class="celebrate">✓</div><h2>You’re all set.</h2><p class="muted">' + p.name + ' is ready for you: ' + counts + '.</p></div>' +
+        '<div class="art">' + obArt('ready') + '</div><button class="btn btn-primary btn-wide" data-a="open" data-p="' + id + '">Explore ' + p.name + '</button><button class="linkbtn btn-wide" data-a="toFreeHome">Back to all plans</button>';
+    }
+    return '<div class="ob"><div class="card">' + dots + h + '</div></div>';
+  }
+
+  /* ================= Plan hubs ================= */
+  function hubHead(id) {
+    return '<button class="linkbtn back" data-a="go" data-v="plans">← All plans</button><div class="hubhead hh-' + id + '">' + iconBox(id) + '<div class="grow"><h2>' + PLANS[id].name + '</h2><span class="badge">' + (S.plans[id] === 'paused' ? 'Paused · not cancelled' : 'Free trial · ' + daysLeft(id) + ' days left') + '</span></div>' +
+      '<button class="btn btn-white btn-sm" data-a="manage" data-p="' + id + '">Manage plan</button></div>';
+  }
+  function tile(i) {
+    var t = TITLES[i];
+    return '<button class="tile" data-a="item" data-k="title" data-v="' + i + '">' + posterBox(i) + '<span class="tname">' + esc(t.n) + '</span><span class="tmeta">' + esc(t.g) + ' · ' + esc(t.d) + '</span></button>';
+  }
+  function row(title, idxs) { if (!idxs.length) return ''; return '<section class="rowsec"><h3>' + esc(title) + '</h3><div class="scroller">' + idxs.map(tile).join('') + '</div></section>'; }
+  function idxWhere(fn) { var r = []; TITLES.forEach(function (t, i) { if (fn(t, i)) r.push(i); }); return r; }
+  function hubWatch() {
+    var ints = S.ints.watch, f = 1;
+    var h = '<div class="feature"><div>' + posterBox(f) + '</div><div><span class="badge" style="background:rgba(255,255,255,.15);color:#fff">Featured this week</span>' +
+      '<h3 style="margin-top:8px">' + esc(TITLES[f].n) + '</h3><p>' + esc(TITLES[f].s) + '</p><div class="row">' +
+      '<button class="btn btn-white btn-sm" data-a="item" data-k="trailer" data-v="' + f + '">▶ Play trailer</button>' +
+      '<button class="btn btn-sm" style="background:rgba(255,255,255,.15);color:#fff" data-a="item" data-k="title" data-v="' + f + '">More info</button></div></div></div>';
+    if (S.myList.length) h += row('My List', S.myList);
+    if (ints.length) h += row('Because you like ' + ints.slice(0, 2).join(' and '), idxWhere(function (t) { return has(ints, t.g); }));
+    h += row('Trending this week', [1, 0, 2, 7, 4, 12, 9, 20]);
+    h += row('Student favourites', [8, 15, 3, 5, 19, 11, 21]);
+    h += row('New series', idxWhere(function (t) { return t.ty === 'Series'; }));
+    h += row('Thrillers & mysteries', idxWhere(function (t) { return t.g === 'Thriller' || t.g === 'Mystery' || t.g === 'Horror'; }));
+    h += row('Real stories', idxWhere(function (t) { return t.g === 'Documentary' || t.g === 'Reality'; }));
+    h += row('Award winners', [17, 12, 6, 9, 20]);
+    h += '<p class="disc">Real film and series titles are shown as examples. Posters are illustrations and no video plays in this demo.</p>';
+    return h;
+  }
+  function eventRow(e, i) {
+    var going = has(S.going, i);
+    return '<div class="card event" style="padding:14px"><div class="date"><b>' + e.day + '</b>' + e.time + '</div><div class="grow"><b>' + esc(e.t) + '</b><p class="small">' + esc(e.d) + '</p><p class="small">' + (e.n + (going ? 1 : 0)) + ' students going</p></div>' +
+      (typeof i === 'number' && S.view === 'hub' ? '<button class="btn btn-sm ' + (going ? 'btn-soft' : 'btn-primary') + '" data-a="going" data-v="' + i + '">' + (going ? '✓ You’re in' : 'I’m in') + '</button>' : '') + '</div>';
+  }
+  function hubLife() {
+    var cats = ['All', 'Coffee', 'Food', 'Cinema', 'Activities', 'Friends'];
+    var saved = S.usedP.reduce(function (a, i) { return a + PERKS[i].s; }, 0);
+    var list = PERKS.map(function (p, i) { return [p, i]; }).filter(function (x) { return S.lcat === 'All' || x[0].c === S.lcat; });
+    return '<div class="card mb"><div class="savings"><div class="grow"><p class="small">Perks used in this demo</p><span class="n">' + S.usedP.length + '</span></div><div class="grow"><p class="small">Simulated savings</p><span class="n">€' + saved.toFixed(2) + '</span></div></div>' +
+      '<p class="small">' + esc(BRAND_NOTE) + '</p></div>' +
+      '<div class="tabs">' + cats.map(function (c) { return '<button class="' + (S.lcat === c ? 'on' : '') + '" data-a="lcat" data-v="' + c + '">' + c + '</button>'; }).join('') + '</div>' +
+      '<div class="perkgrid">' + list.map(function (x) {
+        var p = x[0], i = x[1];
+        return '<button class="perk" data-a="item" data-k="perk" data-v="' + i + '"><div class="pa">' + lifeArt(p.c, i) + '</div><div class="pb"><span class="tagc">' + esc(p.c) + '</span><span class="brand">' + esc(p.w) + '</span><div class="deal">' + esc(p.t) + '</div>' +
+          (has(S.usedP, i) ? '<span class="used">✓ Used</span>' : '') + '</div></button>';
+      }).join('') + '</div>' +
+      '<h3 class="h3">Plans with friends this week</h3><div class="stack">' + EVENTS.map(eventRow).join('') + '</div>';
+  }
+  function hubStudy() {
+    var tabs = [['sum', 'Summaries'], ['notes', 'Notes'], ['fc', 'Flashcards'], ['quiz', 'Quizzes']];
+    var h = '<div class="tabs">' + tabs.map(function (t) { return '<button class="' + (S.stab === t[0] ? 'on' : '') + '" data-a="stab" data-v="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</div>';
+    if (S.stab === 'sum') {
+      h += '<p class="muted mb">' + SUMS.length + ' summaries · ' + S.readS.length + ' read</p><div class="sumgrid">' + SUMS.map(function (s, i) {
+        return '<button class="sumcard" data-a="item" data-k="sum" data-v="' + i + '"><div class="cover">' + cover(i) + '</div><span class="tname">' + esc(s.t) + '</span><span class="tmeta">' + esc(s.a) + ' · ' + s.m + ' min' + (has(S.readS, i) ? ' · ✓ Read' : '') + '</span></button>';
+      }).join('') + '</div>';
+    } else if (S.stab === 'notes') {
+      h += NOTES.map(function (f, fi) {
+        return '<div class="card folder"><h4>' + f.e + ' ' + esc(f.s) + '</h4>' + f.n.map(function (n, ni) {
+          return '<button class="mi" data-a="item" data-k="note" data-v="' + fi + '-' + ni + '">' + esc(n.t) + '<span>›</span></button>'; }).join('') + '</div>';
+      }).join('');
+    } else if (S.stab === 'fc') {
+      var c = CARDS[S.fc.i];
+      h += '<div class="card"><div class="row" style="justify-content:space-between"><b>Key terms deck</b><span class="small">Card ' + (S.fc.i + 1) + ' of ' + CARDS.length + '</span></div>' +
+        '<div class="fc"><button class="fc-in ' + (S.fc.flip ? 'back' : '') + '" data-a="fcflip">' + (S.fc.flip ? '<span class="small">Answer</span><p style="font-size:1.1rem;font-weight:600;margin-top:6px">' + esc(c[1]) + '</p>' : '<span class="small" style="color:#fff;opacity:.85">Tap to flip</span><b>' + esc(c[0]) + '</b>') + '</button></div>' +
+        '<div class="g2"><button class="btn btn-soft" data-a="fcmark" data-v="again">↻ Review again</button><button class="btn btn-primary" data-a="fcmark" data-v="got">✓ Got it</button></div>' +
+        '<div class="row mt" style="justify-content:space-between"><button class="linkbtn" data-a="fcmove" data-v="-1">← Previous</button><span class="small">Got it: ' + S.fc.got + ' · Again: ' + S.fc.again + '</span><button class="linkbtn" data-a="fcmove" data-v="1">Next →</button></div></div>';
+    } else {
+      h += '<div class="stack">' + QUIZ.map(function (q, i) {
+        return '<div class="card sub-head"><div class="icon i-study" aria-hidden="true">?</div><div class="grow"><b>' + esc(q.t) + '</b><p class="small">' + q.q.length + ' questions · about 2 minutes</p></div><button class="btn btn-primary btn-sm" data-a="qstart" data-v="' + i + '">Start quiz</button></div>';
+      }).join('') + '</div>';
+    }
+    return h;
+  }
+  function viewHub() {
+    var id = S.cur;
+    if (!isLive(id)) return viewSubs();
+    var more = liveCount() < 2 ? '<div class="card more-plans"><div class="grow"><b>Want another plan?</b><p class="small" style="color:var(--ink)">You can try 2 plans at the same time.</p></div><button class="btn btn-white" data-a="toFreeHome">See all plans</button></div>'
+      : '<div class="card more-plans"><div class="grow"><b>You have 2 plans.</b><p class="small" style="color:var(--ink)">Switch between them with the bar at the bottom.</p></div><button class="btn btn-white" data-a="go" data-v="subs">My plans</button></div>';
+    return hubHead(id) + (id === 'watch' ? hubWatch() : id === 'life' ? hubLife() : hubStudy()) + more;
+  }
+  function viewItem() {
+    var it = S.item, id = S.cur, back = '<button class="linkbtn back" data-a="back">← Back to ' + PLANS[id].name + '</button>', h = '';
+    if (!it || !isLive(id)) return viewSubs();
+    if (it.k === 'title') {
+      var t = TITLES[it.i], inList = has(S.myList, it.i), match = 80 + (it.i * 7) % 19;
+      var eps = t.ty === 'Series' ? '<h3 class="h3">Episodes · Season 1</h3>' + [1, 2, 3, 4].map(function (n) { return '<div class="ep"><div class="pn">' + n + '</div><div class="grow"><b>Episode ' + n + '</b><div class="small">' + (38 + n * 3) + ' min</div></div></div>'; }).join('') : '';
+      var more = idxWhere(function (x, i) { return x.g === t.g && i !== it.i; });
+      h = '<div class="detail"><div>' + posterBox(it.i) + '</div><div><h2 class="section-title" style="margin:0">' + esc(t.n) + '</h2>' +
+        '<div class="meta"><span>' + esc(t.g) + '</span><span>' + esc(t.ty) + '</span><span>' + esc(t.d) + '</span><span style="background:var(--okbg);color:var(--ok)">' + match + '% match</span></div>' +
+        '<p>' + esc(t.s) + '</p><div class="row mt"><button class="btn btn-primary" data-a="item" data-k="trailer" data-v="' + it.i + '">▶ Play trailer</button>' +
+        '<button class="btn btn-soft" data-a="mylist" data-v="' + it.i + '">' + (inList ? '✓ In My List' : '+ My List') + '</button></div>' + eps + '</div></div>' +
+        row('More like this', more.length ? more : [0, 3, 8]);
+    } else if (it.k === 'trailer') {
+      var tt = TITLES[it.i];
+      h = '<div class="player"><svg viewBox="0 0 200 112" preserveAspectRatio="xMidYMid slice">' + poster(it.i).replace(/^<svg[^>]*>|<\/svg>$/g, '') + '</svg><div class="ov"><div class="pl">▶</div><b>' + esc(tt.n) + ' · Trailer</b><span class="small" style="color:#fff;opacity:.85">Simulated trailer. No video plays in this demo.</span></div><div class="pbar"><i></i></div></div>' +
+        '<div class="row mt"><button class="btn btn-soft" data-a="item" data-k="title" data-v="' + it.i + '">More info</button><button class="btn btn-soft" data-a="mylist" data-v="' + it.i + '">' + (has(S.myList, it.i) ? '✓ In My List' : '+ My List') + '</button></div>' +
+        row('Up next', [2, 7, 9, 12]);
+    } else if (it.k === 'perk') {
+      var p = PERKS[it.i], used = has(S.usedP, it.i);
+      h = '<div class="flow"><div class="coupon"><div style="border-radius:14px;overflow:hidden;aspect-ratio:16/9">' + lifeArt(p.c, 'big' + it.i) + '</div>' +
+        '<span class="tagc mt" style="display:block">' + esc(p.c) + '</span><span class="brand" style="font-size:1.3rem">' + esc(p.w) + '</span><h2 class="section-title" style="margin:4px 0">' + esc(p.t) + '</h2><p class="muted">' + esc(p.d) + '</p>' +
+        qr(it.i + 3) + '<div class="codeline">SP-' + (4170 + it.i * 37) + '</div><p class="small">Fictional code: it won\u2019t work in real shops. ' + esc(BRAND_NOTE) + '</p>' +
+        '<button class="btn ' + (used ? 'btn-soft' : 'btn-primary') + ' btn-wide mt" data-a="used" data-v="' + it.i + '">' + (used ? '✓ Used · you saved about €' + p.s.toFixed(2) + ' (simulated)' : 'Mark as used') + '</button></div></div>';
+    } else if (it.k === 'sum') {
+      var s = SUMS[it.i], rd = has(S.readS, it.i);
+      h = '<div class="detail"><div class="cover" style="max-width:220px">' + cover(it.i) + '</div><div class="card reader"><span class="badge">' + s.m + ' min read</span><h2 class="section-title" style="margin:8px 0 2px">' + esc(s.t) + '</h2><p class="muted mb">' + esc(s.a) + '</p><p class="muted mb">Key ideas</p><ol>' +
+        s.k.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ol><button class="btn ' + (rd ? 'btn-soft' : 'btn-primary') + ' btn-wide" data-a="read" data-v="' + it.i + '">' + (rd ? '✓ Marked as read' : 'Mark as read') + '</button></div></div>';
+    } else if (it.k === 'note') {
+      var ab = String(it.i).split('-'), fo = NOTES[+ab[0]], n = fo.n[+ab[1]];
+      h = '<div class="flow"><div class="card"><span class="badge">' + fo.e + ' ' + esc(fo.s) + '</span><h2 class="section-title" style="margin:8px 0">' + esc(n.t) + '</h2><ul class="perks">' + n.k.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul>' +
+        '<p class="small mt">Last edited: today · Sample note</p></div></div>';
+    } else if (it.k === 'quiz') {
+      var qz = S.qz, Q = QUIZ[qz.q];
+      if (qz.done) {
+        h = '<div class="flow"><div class="card result"><div class="celebrate">' + qz.score + '/' + Q.q.length + '</div><h2>' + esc(Q.t) + '</h2><p class="muted">You scored ' + qz.score + ' out of ' + Q.q.length + '.</p>' +
+          '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="qstart" data-v="' + qz.q + '">Try again</button><button class="btn btn-soft btn-wide" data-a="back">Back to quizzes</button></div></div></div>';
+      } else {
+        var qq = Q.q[qz.n];
+        h = '<div class="flow"><div class="card"><div class="prog"><div class="prog-l">' + esc(Q.t) + ' · Question ' + (qz.n + 1) + ' of ' + Q.q.length + '</div><div class="bar"><i style="width:' + ((qz.n) / Q.q.length * 100) + '%"></i></div></div>' +
+          '<h2>' + esc(qq[0]) + '</h2><div class="mt">' + qq[1].map(function (o, j) {
+            var cls = qz.ans == null ? '' : (j === qq[2] ? 'right' : (j === qz.ans ? 'wrong' : ''));
+            return '<button class="qopt ' + cls + '" data-a="qans" data-v="' + j + '"' + (qz.ans != null ? ' disabled' : '') + '>' + esc(o) + '</button>';
+          }).join('') + '</div>' +
+          (qz.ans != null ? '<p class="' + (qz.ans === qq[2] ? 'active-note' : 'errbox') + '">' + (qz.ans === qq[2] ? 'Correct! ' : 'Not quite. ') + esc(qq[3]) + '</p><button class="btn btn-primary btn-wide mt" data-a="qnext">' + (qz.n + 1 < Q.q.length ? 'Next question' : 'See my score') + '</button>' : '') + '</div></div>';
+      }
+    }
+    return back + h;
+  }
+
+  /* ================= My plans ================= */
+  function viewSubs() {
+    var ids = ORDER.filter(function (id) { return S.plans[id] !== 'none'; });
+    var news = S.plans.news !== 'none' ? '<h3 class="h3">Emails</h3><div class="card news">' + iconBox('news') + '<div class="grow"><b>Student+ Drop</b><br><span class="small">Weekly newsletter</span><br>' + statusBadge('news') + '</div>' +
+      (S.plans.news === 'active' ? '<button class="btn btn-line btn-sm" data-a="unsub">Manage emails</button>' : '') + '</div>' : '';
+    if (!ids.length) return '<h2 class="section-title">My plans</h2><div class="card empty"><div class="celebrate">+</div><p style="font-size:1.2rem;font-weight:800">Nothing here yet</p><p class="muted" style="margin:6px 0 16px">Start a free trial and it will show up here.</p><button class="btn btn-primary" data-a="toFreeHome">Find a plan</button></div>' + news;
+    var more = liveCount() < 2 ? '<div class="card more-plans"><div class="grow"><b>Room for one more</b><p class="small">You can have 2 plans at the same time.</p></div><button class="btn btn-white" data-a="toFreeHome">Add a plan</button></div>' : '';
+    return '<h2 class="section-title">My plans</h2><p class="muted" style="margin:-6px 0 14px">Active plans: ' + liveCount() + ' of 2</p><div class="stack">' + ids.map(function (id) {
+      var p = PLANS[id], live = isLive(id);
+      return '<article class="card sub"><div class="sub-head">' + iconBox(id) + '<div class="grow"><h3 style="font-size:1.3rem;font-weight:800;letter-spacing:-.03em">' + p.name + '</h3>' + statusBadge(id) + '</div></div>' +
+        (live ? '<p class="muted">' + esc(p.tag) + '</p><div class="g2"><button class="btn btn-primary" data-a="open" data-p="' + id + '">Open ' + p.name + '</button><button class="btn btn-line" data-a="manage" data-p="' + id + '">Manage plan</button></div>'
+          : '<p class="muted">This plan is cancelled. It is no longer active.</p>') + '</article>';
+    }).join('') + '</div>' + news + more;
+  }
+
+  /* ================= Cancellation flow ================= */
+  function manageHTML(f) {
+    var p = PLANS[f.plan];
+    return '<div class="step-top">' + iconBox(f.plan, 44) + '<div><b>' + p.name + '</b><br>' + statusBadge(f.plan) + '</div></div>' +
+      '<h2>Manage plan</h2><div class="sample mb">Free trial until <b>' + trialEnd(f.plan) + '</b> (' + daysLeft(f.plan) + ' days left), then <b>€' + PRICE[f.plan] + '/month</b>. <span class="small">Simulated price, nothing is ever charged.</span></div>' +
+      '<div class="card" style="box-shadow:none;padding:4px 14px">' +
+      '<button class="mi" data-a="na">Change plan<span>›</span></button>' +
+      '<button class="mi" data-a="na">Notifications<span>›</span></button>' +
+      '<button class="mi" data-a="na">' + (f.plan === 'watch' ? 'Download settings' : f.plan === 'life' ? 'Favourite places' : 'Study reminders') + '<span>›</span></button>' +
+      '<button class="mi" data-a="na">Help<span>›</span></button>' +
+      '<button class="mi" data-a="more" aria-expanded="' + !!f.more + '">More options<span>' + (f.more ? '▴' : '▾') + '</span></button>' +
+      (f.more ? '<div style="padding-left:12px"><button class="mi" data-a="na">Privacy<span>›</span></button><button class="mi" data-a="na">Payment history<span>›</span></button><button class="mi" data-a="cancelStart">Cancel subscription<span>›</span></button></div>' : '') +
+      '</div><button class="btn btn-primary btn-wide mt" data-a="open" data-p="' + f.plan + '">Back to ' + p.name + '</button>';
+  }
+  function goBtn(label, link) { return link ? '<button class="linkbtn btn-wide" data-a="fnext">' + esc(label) + '</button>' : '<button class="btn btn-line btn-wide" data-a="fnext">' + esc(label) + '</button>'; }
+  function stepOk(f, st) {
+    var i = f.i, k;
+    if (st.ty === 'choice') return f.sel[i + 'c'] != null;
+    if (st.ty === 'survey') { for (k = 0; k < st.qs.length; k++) if (f.sel[i + 'q' + k] == null) return false; return true; }
+    if (st.ty === 'check') { for (k = 0; k < st.items.length; k++) if (!f.sel[i + 'x' + k]) return false; return true; }
+    if (st.ty === 'type') return (f.typed || '').trim().toUpperCase() === st.word;
+    if (st.ty === 'code') return f.code === st.code;
+    if (st.ty === 'prefs') { for (k = 0; k < st.items.length; k++) if (!f.sel[i + 'f' + k]) return false; return true; }
+    return true;
+  }
+  function stepHTML(f, st) {
+    var i = f.i, p = PLANS[f.plan], h = '<h2>' + esc(st.t) + '</h2>', ok = stepOk(f, st);
+    var cont = function (label, hint) { return '<button class="btn btn-primary btn-wide" data-a="fnext" id="fgo"' + (ok ? '' : ' disabled') + '>' + esc(label || 'Continue') + '</button>' + (!ok && hint ? '<p class="small center" style="margin-top:8px">' + esc(hint) + '</p>' : ''); };
+    switch (st.ty) {
+      case 'info':
+        h += '<p class="muted">' + esc(st.b || '') + '</p>';
+        if (st.posters) h += '<div class="g3 mt mb">' + st.posters.map(function (x) { return '<div class="match">' + posterBox(x) + '<span>' + (30 + x * 17 % 60) + '% watched</span></div>'; }).join('') + '</div>';
+        if (st.lose) h += '<ul class="lose">' + st.lose.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+        h += '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="keep" data-v="keep">' + esc(st.stay) + '</button>' + goBtn(st.go, st.goLink) + '</div>';
+        break;
+      case 'prefs':
+        var shown = f.sel[i + 'more'] ? st.items.length : st.shown;
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="opts">' + st.items.slice(0, shown).map(function (x, j) {
+          var off = !!f.sel[i + 'f' + j]; return '<button class="opt ' + (off ? '' : 'on') + '" role="switch" aria-checked="' + !off + '" data-a="tick" data-k="' + i + 'f' + j + '">' + esc(x) + '<span class="tgl"></span></button>'; }).join('') + '</div>' +
+          (shown < st.items.length ? '<button class="linkbtn btn-wide mb" data-a="tick" data-k="' + i + 'more">Show more email types</button>' : '') +
+          '<div class="stack"><button class="btn btn-primary btn-wide" data-a="keep" data-v="keep">Save preferences</button>' +
+          '<button class="btn btn-line btn-wide" data-a="fnext" id="fgo"' + (ok ? '' : ' disabled') + '>Unsubscribe from all emails</button>' +
+          (ok ? '' : '<p class="small center">Turn off every type of email to unsubscribe.</p>') + '</div>';
+        break;
+      case 'choice':
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="opts" role="radiogroup">' + st.opts.map(function (o, j) {
+          var sel = f.sel[i + 'c'] === j; return '<button class="opt ' + (sel ? 'sel' : '') + '" role="radio" aria-checked="' + sel + '" data-a="sel" data-k="' + i + 'c" data-v="' + j + '"><span class="dot"></span>' + esc(o) + '</button>'; }).join('') + '</div>' +
+          cont('Continue', 'Select a reason to continue.');
+        break;
+      case 'survey':
+        h += '<p class="muted mb">' + esc(st.b) + '</p>' + st.qs.map(function (q, qi) {
+          return '<p style="font-weight:700">' + esc(q) + '</p><div class="scale">' + [1, 2, 3, 4, 5].map(function (n) {
+            return '<button class="' + (f.sel[i + 'q' + qi] === n ? 'sel' : '') + '" data-a="sel" data-k="' + i + 'q' + qi + '" data-v="' + n + '" aria-label="' + n + ' out of 5">' + n + '</button>'; }).join('') + '</div><div class="scale-l"><span>Not at all</span><span>Very much</span></div>';
+        }).join('') + cont('Send feedback and continue', 'Answer all questions to continue.');
+        break;
+      case 'offer':
+        h += '<div class="offer"><div class="big">' + esc(st.big) + '</div><div>' + esc(st.sub) + '</div><button class="btn btn-white" data-a="keep" data-v="' + st.k + '">' + esc(st.stay) + '</button></div>' + goBtn(st.go, true);
+        break;
+      case 'pause':
+        h += '<div class="pausebox"><h3>' + esc(st.big) + '</h3><p class="muted mb">' + esc(st.b) + '</p><button class="btn btn-primary btn-wide" data-a="keep" data-v="pause">' + esc(st.stay) + '</button></div>' +
+          '<div class="stack"><button class="btn btn-soft btn-wide" data-a="keep" data-v="keep">Keep my plan as it is</button>' + goBtn(st.go, true) + '</div>';
+        break;
+      case 'check':
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="opts">' + st.items.map(function (x, j) {
+          var on = !!f.sel[i + 'x' + j]; return '<button class="opt ' + (on ? 'sel' : '') + '" role="checkbox" aria-checked="' + on + '" data-a="tick" data-k="' + i + 'x' + j + '"><span class="box">' + (on ? '✓' : '') + '</span>' + esc(x) + '</button>'; }).join('') + '</div>' +
+          cont('Continue', 'Tick every box to continue.') + '<button class="btn btn-soft btn-wide mt" data-a="keep" data-v="keep">Keep ' + p.name + '</button>';
+        break;
+      case 'trap':
+        var on = f.sel[i + 't'] !== false;
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="opts"><button class="opt ' + (on ? 'sel' : '') + '" role="checkbox" aria-checked="' + on + '" data-a="trap"><span class="box">' + (on ? '✓' : '') + '</span>' + esc(st.box) + '</button></div>' +
+          '<p class="small mb">You can change these settings later in your account.</p><button class="btn btn-primary btn-wide" data-a="fnext">Continue</button>';
+        break;
+      case 'type':
+        h += '<p class="muted">To confirm that you want to cancel ' + p.name + ', type the word <span class="word">' + st.word + '</span> below.</p>' +
+          '<input class="typein" id="typein" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" aria-label="Type ' + st.word + '" placeholder="Type ' + st.word + '" value="' + esc(f.typed || '') + '">' +
+          cont('Continue', 'Type the word exactly to continue.') + '<button class="btn btn-soft btn-wide mt" data-a="keep" data-v="keep">Keep ' + p.name + '</button>';
+        break;
+      case 'code':
+        h += '<p class="muted">We sent a 4-digit code to your Student+ inbox.</p><div class="inbox"><div class="small">📥 Simulated inbox · no real message is sent</div><b>Student+ Security</b><p>Your cancellation code is <span class="word">' + st.code + '</span>. It expires in 10 minutes.</p></div>' +
+          '<div class="digits" aria-label="Code entered">' + [0, 1, 2, 3].map(function (d) { return '<span>' + (f.code.charAt(d) || '') + '</span>'; }).join('') + '</div>' +
+          (f.msg ? '<div class="errbox">' + esc(f.msg) + '</div>' : '') +
+          '<div class="pad">' + ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'del', '0', ''].map(function (k) {
+            if (!k) return '<span></span>'; return '<button data-a="key" data-v="' + k + '" aria-label="' + (k === 'del' ? 'Delete' : k) + '">' + (k === 'del' ? '⌫' : k) + '</button>'; }).join('') + '</div>' +
+          cont('Verify code', 'Enter the 4-digit code to continue.');
+        break;
+      case 'wait':
+        h += '<div class="spin" aria-hidden="true"></div><p class="muted center">Please don’t close this page.</p>';
+        var fid = f.id, fi = f.i;
+        schedule('w' + fid + '_' + fi, st.ms, function () { if (S.flow && S.flow.id === fid && S.flow.i === fi && !S.flow.res) { advance(S.flow); save(); render(true); } });
+        break;
+      case 'pending':
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="warnbox">Status: Active · cancellation request pending</div>' +
+          '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="keep" data-v="keep">' + esc(st.stay) + '</button>' + goBtn(st.go, false) + '</div>';
+        break;
+      case 'final':
+        h += '<p class="muted">' + esc(st.b) + '</p><div class="divider"></div><div class="stack"><button class="btn btn-primary btn-wide" data-a="keep" data-v="keep">' + esc(st.stay) + '</button>' +
+          '<button class="btn btn-line btn-wide" data-a="confirmCancel">' + esc(st.go) + '</button></div>';
+        break;
+      case 'ivr':
+        h += '<p class="muted">' + esc(st.b) + '</p>' + ivrHTML(f);
+        break;
+      case 'help':
+        var art = f.art;
+        h += '<div class="search" aria-hidden="true">🔍 Search help articles</div>';
+        if (art === 'ok') {
+          h += '<div class="card" style="box-shadow:none"><b>Ending your membership</b><p class="muted mt">To end your membership, start a conversation with our virtual assistant. It will guide you through the process.</p></div>' +
+            '<div class="stack mt"><button class="btn btn-primary btn-wide" data-a="fnext">Start chat</button><button class="linkbtn btn-wide" data-a="help" data-v="list">← Back to articles</button></div>';
+        } else {
+          h += (f.msg ? '<div class="warnbox">' + esc(f.msg) + '</div>' : '') + '<p class="small mb">Popular articles</p><div class="card" style="box-shadow:none;padding:4px 14px">' + HELP.map(function (a, j) {
+            return '<button class="mi" data-a="help" data-v="' + j + '">' + esc(a.t) + '<span>›</span></button>'; }).join('') + '</div>' +
+            '<button class="btn btn-soft btn-wide mt" data-a="keep" data-v="keep">Back to studying</button>';
+        }
+        break;
+      case 'chat':
+        h += chatHTML(f);
+        break;
+    }
+    return h;
+  }
+  function ivrHTML(f) {
+    var m = f.menu, h = '<div class="phonebox"><div class="row" style="justify-content:space-between"><b>Life+ perks line</b><span class="small">Simulated call</span></div>';
+    if (m === 'hold') {
+      h += '<div class="hold" aria-hidden="true">♪ ♫ ♪</div><p class="center">All our agents are busy.<br>You are number 2 in the queue.</p>';
+      var fid = f.id;
+      schedule('ivr' + fid + '_' + f.i, 3500, function () { if (S.flow && S.flow.id === fid && S.flow.menu === 'hold') { S.flow.menu = 'agent'; save(); render(); } });
+    } else if (m === 'agent') {
+      h += '<div class="menu"><b>Agent (simulated):</b> I’ve registered your request to end your membership. Please finish it in the app.</div><button class="btn btn-white btn-wide" data-a="fnext">Hang up and continue</button>';
+    } else {
+      var lines = m === 'more' ? ['Press 1 to pause your plan', 'Press 2 for account details', 'Press 3 for technical help', 'Press 4 to end your membership', 'Press 9 to return to the main menu'] :
+        ['Welcome to the Life+ perks line.', 'Press 1 for new perks and offers', 'Press 2 for billing questions', 'Press 3 for partner cafés and restaurants', 'Press 0 for more options'];
+      h += '<div class="menu">' + lines.map(function (l) { return '<div>' + esc(l) + '</div>'; }).join('') + '</div>' + (f.msg ? '<div class="warnbox">' + esc(f.msg) + '</div>' : '') +
+        '<div class="pad">' + ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'].map(function (k) { return '<button data-a="ivr" data-v="' + k + '">' + k + '</button>'; }).join('') + '</div>';
+    }
+    return h + '</div><button class="btn btn-soft btn-wide" data-a="keep" data-v="keep">Hang up and keep Life+</button>';
+  }
+  function chatHTML(f) {
+    var msgs = f.chat.map(function (m) { return '<div class="msg ' + m.from + '">' + (m.who ? '<div class="who">' + esc(m.who) + '</div>' : '') + esc(m.text) + '</div>'; }).join('');
+    if (f.typing) {
+      msgs += '<div class="typing">Typing <span>•</span><span>•</span><span>•</span></div>';
+      var fid = f.id, len = f.chat.length;
+      schedule('ch' + fid + '_' + len, f.pend && f.pend.slow ? 1800 : 800, function () { if (S.flow && S.flow.id === fid && S.flow.typing && S.flow.chat.length === len) { finishTyping(S.flow); save(); render(); } });
+    }
+    var reps = '';
+    if (!f.typing && CH[f.node].r) reps = CH[f.node].r.map(function (r, j) { return '<button class="btn ' + (r.keep ? 'btn-primary' : 'btn-line') + ' btn-wide" data-a="reply" data-v="' + j + '">' + esc(r.t) + '</button>'; }).join('');
+    return '<p class="small">Simulated conversation · tap a reply, no typing needed</p><div class="chat" aria-live="polite">' + msgs + '</div><div class="stack">' + reps + '</div>';
+  }
+  function finishTyping(f) {
+    var pd = f.pend || {}; f.typing = false;
+    if (pd.say) { f.chat.push({ from: 'bot', who: CH[f.node].who, text: pd.say }); f.node = pd.to; return; }
+    var n = CH[pd.to]; f.node = pd.to; f.chat.push({ from: 'bot', who: n.who, text: n.b });
+    if (n.auto) { f.typing = true; f.pend = { to: n.auto, slow: true }; }
+  }
+  function enterStep(f) {
+    var st = STEPS[f.plan][f.i]; f.msg = ''; f.code = ''; f.typed = '';
+    if (st.ty === 'chat') { f.chat = [{ from: 'bot', who: CH.n0.who, text: CH.n0.b }]; f.node = 'n0'; f.typing = false; }
+    if (st.ty === 'ivr') f.menu = 'main';
+    if (st.ty === 'help') f.art = null;
+  }
+  function advance(f) { f.i++; enterStep(f); }
+
+  function viewFlow() {
+    var f = S.flow; if (!f) return viewSubs();
+    var id = f.plan, p = PLANS[id], h, isN = id === 'news';
+    if (f.res === 'kept') {
+      var what = { offer: 'Offer applied (simulated).', 'switch': 'You switched to a different version of ' + p.name + ' (simulated).', pause: p.name + ' is paused (simulated). It will restart automatically.', trap: 'The box “' + (STEPS[id].filter(function (s) { return s.ty === 'trap'; })[0].box) + '” was ticked, so your plan stayed active.', keep: 'You chose to keep your plan.' }[f.kept] || 'You kept your plan.';
+      if (isN && f.kept === 'switch') what = 'You switched to one email a month (simulated).';
+      if (isN && f.kept === 'keep') what = 'Your email preferences were saved.';
+      h = '<div class="result"><div class="mark keep">!</div><h2>' + (isN ? 'You are still subscribed' : 'Your plan has NOT been cancelled') + '</h2><p class="muted">' + esc(what) + '</p>' +
+        '<div class="status-line">' + p.name + ' status: ' + (isN ? 'Subscribed' : S.plans[id] === 'paused' ? 'Paused (still not cancelled)' : 'Active') + '</div>' +
+        '<div class="stack"><button class="btn btn-primary btn-wide" data-a="retry">' + (isN ? 'Try unsubscribing again' : 'Try cancelling again') + '</button>' +
+        (isN ? '<button class="btn btn-soft btn-wide" data-a="go" data-v="subs">Back to My plans</button>' : '<button class="btn btn-soft btn-wide" data-a="open" data-p="' + id + '">Back to ' + p.name + '</button>') + '</div></div>';
+    } else if (f.res === 'done') {
+      var secs = Math.max(1, Math.round((f.end - f.start) / 1000));
+      h = '<div class="result"><div class="mark ok">✓</div><h2>' + (isN ? 'You\u2019re unsubscribed' : p.name + ' cancelled') + '</h2><div class="status-line">Status: ' + (isN ? 'Unsubscribed' : 'Cancelled') + '</div>' +
+        '<p class="muted mb">' + (isN ? 'You won\u2019t receive Student+ Drop anymore.' : 'Your cancellation is complete. No charges (this is a simulation).') + '<br>It took you <b>' + f.taps + ' taps</b> and <b>' + fmtTime(secs) + '</b>.</p>' +
+        (!isN && S.plans.news === 'active' ? '<div class="warnbox" style="text-align:left">Heads up: you are still subscribed to the Student+ Drop newsletter. Cancelling a plan doesn\u2019t unsubscribe you.</div><button class="btn btn-line btn-wide mb" data-a="unsub">Manage emails</button>' : '') +
+        '<button class="btn btn-primary btn-wide" data-a="go" data-v="subs">Back to My plans</button></div>';
+    } else if (f.i === -1) {
+      h = manageHTML(f);
+    } else {
+      var st = STEPS[id][f.i], pct = Math.round((f.i + 1) / (f.i + 2) * 100);
+      h = '<div class="step-top">' + iconBox(id, 40) + '<div><b>' + (isN ? 'Unsubscribe from ' : 'Cancel ') + p.name + '</b><br>' + statusBadge(id) + '</div></div>' +
+        '<div class="prog"><div class="prog-l">Step ' + (f.i + 1) + ' of ' + (f.i + 2) + ' · almost done</div><div class="bar"><i style="width:' + pct + '%"></i></div></div>' + stepHTML(f, st);
+    }
+    return '<div class="flow"><div class="card">' + h + '</div></div>';
+  }
+
+  /* ================= End screen ================= */
+  function viewEnded() {
+    var rows = ORDER.concat(['news']).filter(function (id) { return S.plans[id] !== 'none'; }).map(function (id) { return '<div class="sub-head" style="padding:8px 0"><b class="grow">' + PLANS[id].name + '</b>' + statusBadge(id) + '</div>'; }).join('') || '<p class="muted">You did not start any plan.</p>';
+    return '<div class="flow"><div class="card result"><div class="mark ok">✓</div><h2>Demo ended</h2><p class="muted">Thanks for taking part in this classroom simulation.</p>' +
+      '<div style="text-align:left;margin:16px 0">' + rows + '</div><div class="stack"><button class="btn btn-soft btn-wide" data-a="go" data-v="plans">Back to Student+</button>' +
+      '<button class="btn btn-line btn-wide" data-a="restart">Start again from zero</button></div></div>' + resultsHTML(S) + '</div>';
+  }
+
+  /* ================= Presenter ================= */
+  function renderPresenter() {
+    var top = '<header class="top"><div class="wrap top-in"><span class="logo" style="cursor:default">Student<span>+</span></span><span class="ptag" style="order:2">Presenter view</span></div></header>' + notice(), body, inner;
+    if (P.view === 'simple') {
+      if (P.ex === 'active') inner = '<div class="step-top">' + iconBox('watch', 44) + '<div><b>Watch+</b><br><span class="badge ok">Active</span></div></div><h2>Manage plan</h2><p class="muted mb">Example account · separate from the class demo</p><button class="btn btn-primary btn-wide" data-a="pCancel">Cancel subscription</button>';
+      else if (P.ex === 'confirm') inner = '<h2>Cancel Watch+?</h2><p class="muted mb">Your subscription will end now.</p><div class="stack"><button class="btn btn-primary btn-wide" data-a="pConfirm">Confirm cancellation</button><button class="btn btn-soft btn-wide" data-a="pBack">Go back</button></div>';
+      else inner = '<div class="result"><div class="mark ok">✓</div><h2>Subscription cancelled</h2><p class="muted" style="margin:6px 0 14px">Two taps. That’s it.</p><button class="btn btn-soft btn-wide" data-a="pResetEx">Reset this example</button></div>';
+      body = '<div class="simple"><button class="linkbtn" data-a="pPanel">← Back to presenter panel</button><div class="card flow" style="margin-top:8px">' + inner + '</div></div>';
+    } else {
+      body = '<h2 class="section-title">Presenter controls</h2><p class="muted" style="margin:-6px 0 14px">These buttons only affect this browser, not your classmates’ phones.</p>' +
+        (P.msg ? '<div class="okmsg" role="status">' + esc(P.msg) + '</div>' : '') + '<div class="pgrid">' +
+        '<div class="card pcard"><h3>1. Reset this browser</h3><p class="muted">Clears the demo and the example account in this browser only.</p><button class="btn btn-line btn-wide" data-a="pReset">Reset session</button></div>' +
+        '<div class="card pcard"><h3>2. Open the normal demo</h3><p class="muted">The same page your classmates see, without presenter controls.</p><button class="btn btn-primary btn-wide" data-a="pOpen">Open demo</button></div>' +
+        '<div class="card pcard"><h3>3. Simple cancellation (closing)</h3><p class="muted">Separate example account: Cancel subscription → confirm → cancelled.</p><button class="btn btn-primary btn-wide" data-a="pSimple">Show simple version</button></div>' +
+        '</div>' + resultsHTML(S);
+    }
+    return top + '<main><div class="wrap">' + body + '</div></main>';
+  }
+
+  /* ================= Render ================= */
+  var appEl = document.getElementById('app');
+  function render(scroll) {
+    var body;
+    if (isPresenter) { document.body.className = 'nobar'; appEl.innerHTML = renderPresenter(); }
+    else {
+      if (S.view === 'intro') body = viewIntro();
+      else if (S.view === 'subs') body = viewSubs();
+      else if (S.view === 'onboard') body = viewOnboard();
+      else if (S.view === 'hub') body = viewHub();
+      else if (S.view === 'item') body = viewItem();
+      else if (S.view === 'flow') body = viewFlow();
+      else if (S.view === 'ended') body = viewEnded();
+      else body = viewPlans();
+      var bar = S.view !== 'intro' && S.view !== 'ended';
+      document.body.className = bar ? '' : 'nobar';
+      appEl.innerHTML = header() + '<main><div class="wrap">' + body + '</div></main>' + (bar ? bottomNav() : '') + (sheet === 'news' ? newsSheetHTML() : sheet ? sheetHTML() : '');
+    }
+    if (scroll) window.scrollTo(0, 0);
+  }
+  function scrollToFree() {
+    var el = document.getElementById('free');
+    if (el) { try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { el.scrollIntoView(); } }
+  }
+
+  /* ================= Actions ================= */
+  function newFlow(id, prev) { return { id: Date.now() + Math.random(), plan: id, i: -1, more: false, sel: {}, code: '', typed: '', msg: '', chat: [], node: 'n0', typing: false, pend: null, menu: 'main', art: null, res: null, kept: null, start: prev ? prev.start : Date.now(), taps: prev ? prev.taps : 0 }; }
+  function keepPlan(f, kind) {
+    S.c.kept++; f.kept = kind; f.typing = false; f.res = 'kept';
+    if (kind === 'pause') S.plans[f.plan] = 'paused';
+  }
+
+  function startPlan(p) {
+    if (isLive(p) || liveCount() >= 2) { render(); return; }
+    S.plans[p] = 'active'; S.tEnd[p] = Date.now() + 30 * 864e5; S.c.trials++; S.cur = p; S.ob = 0; S.view = 'onboard'; save(); render(true); toast('✓ Your trial is active.');
+  }
+  function handle(a, d) {
+    var f = S.flow, v = d.v, p = d.p;
+    if (S.view === 'flow' && f && !f.res && a !== 'go' && a !== 'end' && a !== 'open') { S.c.taps++; f.taps++; }
+    switch (a) {
+      case 'slide': S.slide = Math.max(0, Math.min(SLIDES.length - 1, S.slide + (+v))); save(); render(true); return;
+      case 'introDone': S.view = 'plans'; save(); render(true); return;
+      case 'pay': sheet = 'pay'; render(); return;
+      case 'newsTog': newsOpt = !newsOpt; render(); return;
+      case 'newsJoin': if (!newsOpt || !pendingPlan) return; S.plans.news = 'active'; S.c.news++; sheet = false; startPlan(pendingPlan); return;
+      case 'unsub':
+        if (S.plans.news !== 'active') return;
+        S.flow = newFlow('news'); S.flow.i = 0; enterStep(S.flow); S.flow.taps = 1; S.c.taps++; S.view = 'flow'; save(); render(true); return;
+      case 'closeSheet': sheet = false; render(); return;
+      case 'toFree': sheet = false; render(); scrollToFree(); return;
+      case 'toFreeHome': S.view = 'plans'; S.flow = null; S.item = null; save(); render(); scrollToFree(); return;
+      case 'go': S.view = v; S.flow = null; S.item = null; save(); render(true); return;
+      case 'start':
+        if (isLive(p) || liveCount() >= 2) { render(); return; }
+        if (S.plans.news !== 'active') { pendingPlan = p; newsOpt = true; sheet = 'news'; render(); return; }
+        startPlan(p); return;
+      case '__start':
+        S.plans[p] = 'active'; S.tEnd[p] = Date.now() + 30 * 864e5; S.c.trials++; S.cur = p; S.ob = 0; S.view = 'onboard'; save(); render(true); toast('✓ Your trial is active.'); return;
+      case 'obNext': S.ob = Math.min(S.ob + 1, 5); save(); render(true); return;
+      case 'obSkip': S.view = 'hub'; save(); render(true); return;
+      case 'obInt': toggle(S.ints[S.cur], v); save(); render(); return;
+      case 'open': if (!isLive(p)) { render(); return; } S.cur = p; S.view = 'hub'; S.item = null; S.flow = null; save(); render(true); return;
+      case 'item': S.item = { k: d.k, i: d.k === 'note' ? v : +v }; S.view = 'item'; save(); render(true); return;
+      case 'back': S.view = 'hub'; S.item = null; save(); render(true); return;
+      case 'mylist': toggle(S.myList, +v); save(); render(); toast(has(S.myList, +v) ? 'Added to My List' : 'Removed from My List', true); return;
+      case 'going': toggle(S.going, +v); save(); render(); return;
+      case 'used': if (!has(S.usedP, +v)) { S.usedP.push(+v); toast('Perk used (simulated)'); } save(); render(); return;
+      case 'read': if (!has(S.readS, +v)) S.readS.push(+v); save(); render(); return;
+      case 'lcat': S.lcat = v; save(); render(); return;
+      case 'stab': S.stab = v; save(); render(); return;
+      case 'fcflip': S.fc.flip = !S.fc.flip; save(); render(); return;
+      case 'fcmark': if (v === 'got') S.fc.got++; else S.fc.again++; S.fc.i = (S.fc.i + 1) % CARDS.length; S.fc.flip = false; save(); render(); return;
+      case 'fcmove': S.fc.i = (S.fc.i + (+v) + CARDS.length) % CARDS.length; S.fc.flip = false; save(); render(); return;
+      case 'qstart': S.qz = { q: +v, n: 0, ans: null, score: 0, done: false }; S.item = { k: 'quiz', i: +v }; S.view = 'item'; save(); render(true); return;
+      case 'qans': if (S.qz.ans != null) return; S.qz.ans = +v; if (+v === QUIZ[S.qz.q].q[S.qz.n][2]) S.qz.score++; save(); render(); return;
+      case 'qnext': S.qz.ans = null; if (S.qz.n + 1 < QUIZ[S.qz.q].q.length) S.qz.n++; else S.qz.done = true; save(); render(true); return;
+
+      case 'manage': if (!isLive(p)) return; S.flow = newFlow(p); S.flow.taps = 1; S.c.taps++; S.view = 'flow'; save(); render(true); return;
+      case 'na': toast('This option isn’t available in this demo.', true); return;
+      case 'more': if (f) { f.more = !f.more; save(); render(); } return;
+      case 'cancelStart': if (!f) return; S.c.attempts++; f.i = 0; enterStep(f); save(); render(true); return;
+      case 'sel': if (!f) return; f.sel[d.k] = +v; save(); render(); return;
+      case 'tick': if (!f) return; f.sel[d.k] = !f.sel[d.k]; save(); render(); return;
+      case 'trap': if (!f) return; f.sel[f.i + 't'] = (f.sel[f.i + 't'] === false); save(); render(); return;
+      case 'fnext':
+        if (!f || f.res) return;
+        var st = STEPS[f.plan][f.i];
+        if (st.ty === 'trap' && f.sel[f.i + 't'] !== false) { keepPlan(f, 'trap'); save(); render(true); return; }
+        if (!stepOk(f, st)) { render(); return; }
+        advance(f); save(); render(true); return;
+      case 'keep': if (!f || f.res) return; keepPlan(f, v); save(); render(true); return;
+      case 'retry': if (!f || !isLive(f.plan)) return; S.flow = newFlow(f.plan, f); if (f.plan === 'news') { S.flow.i = 0; enterStep(S.flow); } save(); render(true); return;
+      case 'confirmCancel':
+        if (!f || f.res || !isLive(f.plan)) return;
+        if (f.plan === 'news') S.c.unsub++; else S.c.cancelled++;
+        S.plans[f.plan] = 'cancelled'; f.res = 'done'; f.end = Date.now(); f.typing = false;
+        S.c.log.push({ p: f.plan === 'news' ? 'Student+ Drop newsletter (unsubscribe)' : PLANS[f.plan].name, s: Math.max(1, Math.round((f.end - f.start) / 1000)), taps: f.taps });
+        save(); render(true); return;
+      case 'key':
+        if (!f) return;
+        if (v === 'del') f.code = f.code.slice(0, -1);
+        else if (f.code.length < 4) {
+          f.code += v; f.msg = '';
+          if (f.code.length === 4 && f.code !== STEPS[f.plan][f.i].code) { f.msg = 'That code is not correct. Check your inbox and try again.'; f.code = ''; }
+        }
+        save(); render(); return;
+      case 'ivr':
+        if (!f) return; f.msg = '';
+        if (f.menu === 'main') {
+          if (v === '0') f.menu = 'more';
+          else if (v === '1') f.msg = 'New perks are added every Monday! Returning to the main menu.';
+          else if (v === '2') f.msg = 'Your trial is free. No payment is due. Returning to the main menu.';
+          else if (v === '3') f.msg = 'Our partner list is in the app. Returning to the main menu.';
+          else f.msg = 'Invalid option. Please try again.';
+        } else if (f.menu === 'more') {
+          if (v === '4') f.menu = 'hold';
+          else if (v === '9') f.menu = 'main';
+          else if (v === '1') { f.msg = 'To pause your plan, please use the app. Returning to the main menu.'; f.menu = 'main'; }
+          else if (v === '2' || v === '3') { f.msg = 'This line is closed right now. Returning to the main menu.'; f.menu = 'main'; }
+          else f.msg = 'Invalid option. Please try again.';
+        }
+        save(); render(); return;
+      case 'help':
+        if (!f) return;
+        if (v === 'list') { f.art = null; f.msg = ''; }
+        else { var art = HELP[+v]; if (art.ok) { f.art = 'ok'; f.msg = ''; } else f.msg = art.t + ': ' + art.a; }
+        save(); render(); return;
+      case 'reply':
+        if (!f || f.typing) return;
+        var r = CH[f.node].r[+v];
+        f.chat.push({ from: 'user', text: r.t });
+        if (r.keep) { keepPlan(f, r.keep); save(); render(true); return; }
+        if (r.step) { advance(f); save(); render(true); return; }
+        f.typing = true; f.pend = { say: r.say, to: r.to }; save(); render(); return;
+      case 'end': sheet = false; S.view = 'ended'; S.flow = null; S.item = null; save(); render(true); return;
+      case 'restart': S = fresh(); save(); render(true); return;
+
+      case 'pReset': store.del(KEY); store.del(KEY_P); S = fresh(); P = freshP(); P.msg = 'Done: this browser’s session was reset.'; saveP(); render(true); return;
+      case 'pOpen': window.location.href = window.location.pathname; return;
+      case 'pSimple': P.view = 'simple'; P.msg = ''; saveP(); render(true); return;
+      case 'pPanel': P.view = 'panel'; saveP(); render(true); return;
+      case 'pCancel': P.ex = 'confirm'; saveP(); render(); return;
+      case 'pBack': P.ex = 'active'; saveP(); render(); return;
+      case 'pConfirm': P.ex = 'cancelled'; saveP(); render(); return;
+      case 'pResetEx': P.ex = 'active'; saveP(); render(); return;
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-a]') : null;
+    if (!b || b.disabled) return;
+    if (b.classList.contains('overlay') && e.target.closest('[data-stop]')) return;
+    handle(b.getAttribute('data-a'), { v: b.getAttribute('data-v'), p: b.getAttribute('data-p'), k: b.getAttribute('data-k') });
+  });
+  document.addEventListener('input', function (e) {
+    if (e.target && e.target.id === 'typein' && S.flow) {
+      S.flow.typed = e.target.value; save();
+      var st = STEPS[S.flow.plan][S.flow.i], btn = document.getElementById('fgo');
+      if (btn) btn.disabled = !stepOk(S.flow, st);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target && e.target.id === 'typein') { var btn = document.getElementById('fgo'); if (btn && !btn.disabled) btn.click(); }
+    if (e.key === 'Escape' && sheet) { sheet = false; render(); }
+  });
+  // Swipe between intro slides
+  var tx = null, ty = null;
+  document.addEventListener('touchstart', function (e) { if (S.view !== 'intro' || !e.target.closest('#slides')) { tx = null; return; } tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (tx == null || S.view !== 'intro') return;
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0 && S.slide < SLIDES.length - 1) handle('slide', { v: '1' });
+      else if (dx > 0 && S.slide > 0) handle('slide', { v: '-1' });
+    }
+  }, { passive: true });
+
+  render();
+})();
+</script>
+</body>
+</html>
